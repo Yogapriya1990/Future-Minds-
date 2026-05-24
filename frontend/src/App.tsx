@@ -13,16 +13,19 @@ const queryClient = new QueryClient({
 });
 
 const Loading = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+  <div className="flex flex-col items-center justify-center h-screen bg-surface-50 gap-4">
+    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-primary animate-pulse">
+      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+    </div>
+    <p className="text-sm text-slate-400 font-medium animate-pulse">Loading...</p>
   </div>
 );
 
 const Placeholder = ({ title }: { title: string }) => (
   <PageWrapper>
     <div className="p-8">
-      <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
-      <p className="text-gray-500 mt-2">This page is being built.</p>
+      <h1 className="text-2xl font-bold text-slate-900">{title}</h1>
+      <p className="text-slate-500 mt-2">This page is being built.</p>
     </div>
   </PageWrapper>
 );
