@@ -30,7 +30,7 @@ interface SidebarProps {
   onClose?: () => void;
 }
 
-function SidebarContent() {
+export function SidebarContent() {
   const location = useLocation();
 
   const isActive = (href: string) =>

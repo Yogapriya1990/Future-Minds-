@@ -1,4 +1,4 @@
-import { useState, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
 import { motion } from 'framer-motion';
@@ -8,14 +8,12 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
     <div className="flex h-screen bg-surface-50 overflow-hidden">
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Sidebar />
 
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <Navbar onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+        <Navbar />
 
         <motion.main
           initial={{ opacity: 0, y: 8 }}
