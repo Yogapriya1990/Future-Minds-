@@ -8,7 +8,7 @@ interface AnimatedInputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const AnimatedInput = forwardRef<HTMLInputElement, AnimatedInputProps>(
-  ({ label, error, className, ...props }, ref) => (
+  ({ label, error, className, onAnimationStart: _onAnimationStart, ...props }, ref) => (
     <div className="w-full">
       {label && (
         <label className="block text-sm font-medium text-gray-700 mb-1">

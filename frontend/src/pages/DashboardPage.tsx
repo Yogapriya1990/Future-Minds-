@@ -5,7 +5,6 @@ import { useAuth } from '../context/AuthContext';
 import { Navbar } from '../components/layout/Navbar';
 import { PageWrapper } from '../components/layout/PageWrapper';
 import { GlassCard } from '../components/ui/GlassCard';
-import { GradientButton } from '../components/ui/GradientButton';
 import { AnimatedList } from '../components/ui/AnimatedList';
 import api from '../services/api';
 
