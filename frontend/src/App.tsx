@@ -58,6 +58,7 @@ const EditCoursePage = lazy(() => import('./pages/teach/EditCoursePage'));
 const ToolMarketplacePage = lazy(() => import('./pages/tools/ToolMarketplacePage'));
 const ToolRunnerPage = lazy(() => import('./pages/tools/ToolRunnerPage'));
 const ToolHistoryPage = lazy(() => import('./pages/tools/ToolHistoryPage'));
+const WorksheetGeneratorPage = lazy(() => import('./pages/tools/WorksheetGeneratorPage'));
 
 // Automations
 const WorkflowListPage = lazy(() => import('./pages/automations/WorkflowListPage'));
@@ -110,6 +111,7 @@ export default function App() {
             <Route path="/teach/courses/:id/edit" element={<ProtectedRoute><Suspense fallback={<Loading />}><EditCoursePage /></Suspense></ProtectedRoute>} />
             <Route path="/tools" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolMarketplacePage /></Suspense></ProtectedRoute>} />
             <Route path="/tools/history" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolHistoryPage /></Suspense></ProtectedRoute>} />
+            <Route path="/tools/worksheet" element={<ProtectedRoute><Suspense fallback={<Loading />}><WorksheetGeneratorPage /></Suspense></ProtectedRoute>} />
             <Route path="/tools/:slug" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolRunnerPage /></Suspense></ProtectedRoute>} />
             <Route path="/automations" element={<ProtectedRoute><Suspense fallback={<Loading />}><WorkflowListPage /></Suspense></ProtectedRoute>} />
             <Route path="/automations/new" element={<ProtectedRoute><Suspense fallback={<Loading />}><WorkflowBuilderPage /></Suspense></ProtectedRoute>} />

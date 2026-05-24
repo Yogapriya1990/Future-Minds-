@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, MessageSquare, BookOpen, GraduationCap,
-  Wrench, Zap, CreditCard, X, Sparkles,
+  Wrench, Zap, CreditCard, X, Sparkles, ClipboardList,
 } from 'lucide-react';
 
 interface SidebarItem {
@@ -18,6 +18,7 @@ const mainItems: SidebarItem[] = [
   { label: 'Learn', href: '/learn', icon: BookOpen },
   { label: 'Teach', href: '/teach', icon: GraduationCap },
   { label: 'AI Tools', href: '/tools', icon: Wrench },
+  { label: 'Worksheets', href: '/tools/worksheet', icon: ClipboardList, badge: 'New' },
   { label: 'Automations', href: '/automations', icon: Zap },
 ];
 
@@ -66,7 +67,12 @@ export function SidebarContent() {
                 className={`sidebar-item ${active ? 'sidebar-item-active' : 'sidebar-item-inactive'}`}
               >
                 <item.icon size={17} className={active ? 'text-white' : 'text-slate-500'} />
-                <span>{item.label}</span>
+                <span className="flex-1">{item.label}</span>
+                {item.badge && !active && (
+                  <span className="text-2xs font-bold px-1.5 py-0.5 rounded-full bg-violet-500/20 text-violet-300 border border-violet-500/30">
+                    {item.badge}
+                  </span>
+                )}
                 {active && (
                   <motion.div
                     layoutId="sidebar-active"
