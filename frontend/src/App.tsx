@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { AdminRoute } from './components/auth/AdminRoute';
-import { PageWrapper } from './components/layout/PageWrapper';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,15 +15,6 @@ const Loading = () => (
   <div className="flex items-center justify-center h-screen">
     <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
   </div>
-);
-
-const Placeholder = ({ title }: { title: string }) => (
-  <PageWrapper>
-    <div className="p-8">
-      <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
-      <p className="text-gray-500 mt-2">This page is being built.</p>
-    </div>
-  </PageWrapper>
 );
 
 // Auth pages
@@ -72,14 +62,6 @@ const UserManagementPage = lazy(() => import('./pages/admin/UserManagementPage')
 const CourseModPage = lazy(() => import('./pages/admin/CourseModPage'));
 const ToolManagementPage = lazy(() => import('./pages/admin/ToolManagementPage'));
 const PlatformAnalyticsPage = lazy(() => import('./pages/admin/PlatformAnalyticsPage'));
-
-function SafePage({ component: Component, title }: { component: React.LazyExoticComponent<() => JSX.Element>; title: string }) {
-  return (
-    <Suspense fallback={<Loading />}>
-      <Component />
-    </Suspense>
-  );
-}
 
 export default function App() {
   return (
