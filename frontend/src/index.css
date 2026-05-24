@@ -56,6 +56,29 @@
   --transition-slow:   300ms ease;
 }
 
+/* ─── Skeleton shimmer ───────────────────────────────────────────────── */
+@keyframes skeleton-shimmer {
+  0%   { background-position: -400% 0; }
+  100% { background-position:  400% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f1f5f9 25%,
+    #f8fafc 50%,
+    #f1f5f9 75%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.6s ease-in-out infinite;
+}
+
+/* ─── Page transition wrapper ────────────────────────────────────────── */
+.page-transition-enter      { opacity: 0; transform: translateY(6px);  }
+.page-transition-enter-done { opacity: 1; transform: translateY(0);     transition: opacity 0.2s ease, transform 0.2s ease; }
+.page-transition-exit       { opacity: 1; transform: translateY(0);     }
+.page-transition-exit-done  { opacity: 0; transform: translateY(-4px);  transition: opacity 0.15s ease, transform 0.15s ease; }
+
 /* ─── Base reset ─────────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

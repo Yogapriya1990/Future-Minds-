@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
+import { FadeIn, Stagger, StaggerItem } from '../components/ui/FadeIn';
+import { SkeletonDashboard } from '../components/ui/Skeleton';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer, BarChart, Bar, Cell,
@@ -135,10 +137,7 @@ const ChartTooltip = ({ active, payload, label }: {active?: boolean; payload?: {
   );
 };
 
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.06 } },
-};
+// Legacy variants kept for welcome banner only
 const item = {
   hidden:  { opacity: 0, y: 14 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
@@ -147,10 +146,12 @@ const item = {
 // ─── Main Dashboard ───────────────────────────────────────────────────────────
 export default function DashboardPage() {
   const { user } = useAuth();
-  const { data: stats } = useQuery<Stats>({
+  const { data: stats, isLoading } = useQuery<Stats>({
     queryKey: ['my-stats'],
     queryFn: () => api.get('/api/analytics/me').then((r) => r.data),
   });
+
+  if (isLoading) return <SkeletonDashboard />;
 
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening';
@@ -297,10 +298,13 @@ export default function DashboardPage() {
         )}
 
         {/* ── Stat cards ───────────────────────────────────────────────── */}
-        <motion.div variants={stagger} initial="hidden" animate="visible" className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+        <Stagger className="grid grid-cols-2 xl:grid-cols-4 gap-4">
           {statCards.map((s) => (
-            <motion.div key={s.label} variants={item}>
-              <div className="card-md h-full">
+            <StaggerItem key={s.label}>
+              <motion.div
+                className="card-md h-full"
+                whileHover={{ y: -3, boxShadow: '0 12px 28px -6px rgba(0,0,0,0.09)', transition: { duration: 0.18 } }}
+              >
                 <div className="flex items-start justify-between mb-4">
                   <div className={`w-10 h-10 rounded-xl ${s.bg} border ${s.border} flex items-center justify-center flex-shrink-0`}>
                     <s.icon size={18} className={s.iconClass} />
@@ -313,16 +317,16 @@ export default function DashboardPage() {
                   <AnimatedCounter to={s.value} />
                 </p>
                 <p className="type-body-sm mt-1.5">{s.label}</p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </motion.div>
+        </Stagger>
 
         {/* ── Main grid: Chart + Quick Actions ────────────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* AI Usage Chart */}
-          <motion.div variants={item} initial="hidden" animate="visible" className="lg:col-span-2">
+          <FadeIn direction="left" className="lg:col-span-2">
             <div className="card-lg h-full">
               <div className="section-title-row">
                 <div>
@@ -369,10 +373,10 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
 
           {/* Quick Actions */}
-          <motion.div variants={item} initial="hidden" animate="visible" className="lg:col-span-1">
+          <FadeIn direction="right" className="lg:col-span-1">
             <div className="card-lg h-full">
               <h2 className="section-title flex items-center gap-2 mb-4">
                 <Target size={16} className="text-violet-500" />
@@ -409,14 +413,14 @@ export default function DashboardPage() {
                 <p className="type-caption mt-1.5">1 of 2 completed</p>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
 
         {/* ── Row: Learning progress + Activities + Tools ──────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
           {/* Learning Progress */}
-          <motion.div variants={item} initial="hidden" animate="visible" className="lg:col-span-1">
+          <FadeIn className="lg:col-span-1">
             <div className="card-lg h-full">
               <div className="section-title-row">
                 <h2 className="section-title flex items-center gap-2">
@@ -460,10 +464,10 @@ export default function DashboardPage() {
                 </ResponsiveContainer>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
 
           {/* Recent Activity */}
-          <motion.div variants={item} initial="hidden" animate="visible" className="lg:col-span-1">
+          <FadeIn className="lg:col-span-1">
             <div className="card-lg h-full">
               <div className="section-title-row">
                 <h2 className="section-title flex items-center gap-2">
@@ -500,10 +504,10 @@ export default function DashboardPage() {
                 </motion.div>
               </Link>
             </div>
-          </motion.div>
+          </FadeIn>
 
           {/* Recommended AI Tools */}
-          <motion.div variants={item} initial="hidden" animate="visible" className="lg:col-span-1">
+          <FadeIn direction="right" className="lg:col-span-1">
             <div className="card-lg h-full">
               <div className="section-title-row">
                 <h2 className="section-title flex items-center gap-2">
@@ -550,14 +554,14 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
 
         {/* ── Bottom row: Worksheets + Student stats ───────────────────── */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
 
           {/* Recent Worksheets */}
-          <motion.div variants={item} initial="hidden" animate="visible" className="lg:col-span-3">
+          <FadeIn className="lg:col-span-3">
             <div className="card-lg">
               <div className="section-title-row">
                 <h2 className="section-title flex items-center gap-2">
@@ -594,10 +598,10 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
 
           {/* Student Stats */}
-          <motion.div variants={item} initial="hidden" animate="visible" className="lg:col-span-2">
+          <FadeIn direction="right" className="lg:col-span-2">
             <div className="card-lg h-full flex flex-col gap-5">
               <h2 className="section-title flex items-center gap-2">
                 <Users size={16} className="text-violet-500" />
@@ -662,7 +666,7 @@ export default function DashboardPage() {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
 
       </div>
