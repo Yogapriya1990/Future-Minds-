@@ -30,6 +30,9 @@ const Placeholder = ({ title }: { title: string }) => (
   </PageWrapper>
 );
 
+// Landing page
+const LandingPage = lazy(() => import('./pages/LandingPage'));
+
 // Auth pages
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
@@ -123,7 +126,7 @@ export default function App() {
             <Route path="/admin/tools" element={<AdminRoute><Suspense fallback={<Loading />}><ToolManagementPage /></Suspense></AdminRoute>} />
             <Route path="/admin/analytics" element={<AdminRoute><Suspense fallback={<Loading />}><PlatformAnalyticsPage /></Suspense></AdminRoute>} />
 
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/" element={<Suspense fallback={<Loading />}><LandingPage /></Suspense>} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </BrowserRouter>
