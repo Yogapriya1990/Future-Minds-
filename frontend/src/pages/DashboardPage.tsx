@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { motion, useMotionValue, animate } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { FadeIn, Stagger, StaggerItem } from '../components/ui/FadeIn';
@@ -92,21 +92,17 @@ const QUICK_ACTIONS = [
 
 function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
   const count = useMotionValue(0);
-  const rounded = useTransform(count, (v) =>
-    v >= 1000 ? `${(v / 1000).toFixed(1)}k` : Math.round(v).toLocaleString()
-  );
+  const [display, setDisplay] = useState('0');
 
   useEffect(() => {
+    const unsub = count.on('change', (v) => {
+      setDisplay(v >= 1000 ? `${(v / 1000).toFixed(1)}k` : Math.round(v).toLocaleString());
+    });
     const controls = animate(count, to, { duration: 1.4, ease: 'easeOut' });
-    return controls.stop;
+    return () => { controls.stop(); unsub(); };
   }, [to, count]);
 
-  return (
-    <motion.span>
-      {rounded}
-      {suffix}
-    </motion.span>
-  );
+  return <span>{display}{suffix}</span>;
 }
 
 function ProgressBar({ value, color = 'bg-violet-500', animated = true }: { value: number; color?: string; animated?: boolean }) {
@@ -206,7 +202,7 @@ export default function DashboardPage() {
       <div className="p-4 sm:p-6 lg:p-8 max-w-content mx-auto space-y-6 pb-12">
 
         {/* ── Welcome banner ──────────────────────────────────────────── */}
-        <motion.div {...item} className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-violet-950 to-slate-900 p-6 sm:p-8">
+        <motion.div variants={item} initial="hidden" animate="visible" className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-violet-950 to-slate-900 p-6 sm:p-8">
           {/* Decorative dots */}
           <div className="absolute inset-0 ai-dot-grid opacity-[0.06]" />
           {/* Glow orbs */}

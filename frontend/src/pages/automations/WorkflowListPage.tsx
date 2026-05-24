@@ -10,7 +10,7 @@ import {
 import api from '../../services/api';
 import { Workflow } from '../../types';
 
-const TRIGGER_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number; className?: string }>; label: string }> = {
+const TRIGGER_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number | string; className?: string }>; label: string }> = {
   manual:    { icon: Hand,    label: 'Manual'    },
   scheduled: { icon: Clock,   label: 'Scheduled' },
   webhook:   { icon: Webhook, label: 'Webhook'   },

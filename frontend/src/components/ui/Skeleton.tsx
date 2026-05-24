@@ -1,15 +1,13 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
 // ─── Base shimmer ─────────────────────────────────────────────────────────────
 
-function Shimmer({ className }: { className?: string }) {
+function Shimmer({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <div
-      className={cn(
-        'skeleton-shimmer rounded-lg',
-        className
-      )}
+      className={cn('skeleton-shimmer rounded-lg', className)}
+      style={style}
     />
   );
 }

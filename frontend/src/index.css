@@ -403,7 +403,7 @@ body {
 
   /* ── Dividers ────────────────────────────────────────────────────── */
   .divider       { @apply border-t border-slate-100; }
-  .divider-dark  { @apply border-t border-white/8; }
+  .divider-dark  { @apply border-t; border-color: rgba(255,255,255,0.08); }
 
   /* Text divider */
   .divider-text {
@@ -523,10 +523,12 @@ body {
 
   /* Cards */
   .dark .card {
-    @apply bg-[#111118] border-white/8 shadow-none;
+    @apply bg-[#111118] shadow-none;
+    border-color: rgba(255,255,255,0.08);
   }
   .dark .card-glass {
-    @apply bg-white/5 border-white/8;
+    @apply bg-white/5;
+    border-color: rgba(255,255,255,0.08);
   }
   .dark .card-ai {
     @apply from-violet-700 to-purple-800;
@@ -536,7 +538,7 @@ body {
   }
 
   /* Badges */
-  .dark .badge-default  { @apply bg-white/8 text-slate-300 border-white/10; }
+  .dark .badge-default  { @apply text-slate-300 border-white/10; background-color: rgba(255,255,255,0.08); }
   .dark .badge-primary  { @apply bg-violet-950/60 text-violet-300 border-violet-800/60; }
   .dark .badge-success  { @apply bg-emerald-950/60 text-emerald-300 border-emerald-800/60; }
   .dark .badge-warning  { @apply bg-amber-950/60 text-amber-300 border-amber-800/60; }
@@ -556,7 +558,7 @@ body {
   .dark .type-label    { @apply text-slate-300; }
   .dark .type-caption  { @apply text-slate-500; }
   .dark .type-overline { @apply text-slate-500; }
-  .dark .type-code     { @apply bg-white/8 text-slate-200; }
+  .dark .type-code     { @apply text-slate-200; background-color: rgba(255,255,255,0.08); }
 
   /* Inputs */
   .dark .input-base {
@@ -568,17 +570,18 @@ body {
   }
 
   /* Sidebar items — sidebar stays dark in both modes */
-  .dark .sidebar-item-inactive { @apply text-slate-400 hover:text-white hover:bg-white/8; }
+  .dark .sidebar-item-inactive { @apply text-slate-400 hover:text-white; }
+  .dark .sidebar-item-inactive:hover { background-color: rgba(255,255,255,0.08); }
 
   /* Section headers */
   .dark .section-title { @apply text-slate-100; }
   .dark .section-subtitle { @apply text-slate-500; }
 
   /* Dividers */
-  .dark .divider { @apply border-white/8; }
+  .dark .divider { border-color: rgba(255,255,255,0.08); }
 
   /* Skeleton */
-  .dark .skeleton { @apply bg-white/6; }
+  .dark .skeleton { background-color: rgba(255,255,255,0.06); }
 
   /* Module icons */
   .dark .module-icon-chat     { @apply bg-violet-950/60 text-violet-400; }
@@ -589,9 +592,10 @@ body {
   .dark .module-icon-admin    { @apply bg-red-950/60 text-red-400; }
 
   /* Table */
-  .dark .table-base thead tr   { @apply bg-white/4 border-white/8; }
+  .dark .table-base thead tr   { background-color: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.08); }
   .dark .table-base thead th   { @apply text-slate-400; }
-  .dark .table-base tbody tr   { @apply border-white/5 hover:bg-white/4; }
+  .dark .table-base tbody tr   { @apply border-white/5; }
+  .dark .table-base tbody tr:hover { background-color: rgba(255,255,255,0.04); }
   .dark .table-base tbody td   { @apply text-slate-300; }
 
   /* Alerts */

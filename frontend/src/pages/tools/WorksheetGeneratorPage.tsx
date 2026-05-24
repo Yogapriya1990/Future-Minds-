@@ -1,10 +1,10 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Upload, ImageIcon, FileText, Sliders, Eye, Download, CheckCircle2,
-  X, RefreshCw, ChevronRight, Printer, Sparkles, BookOpen, GraduationCap,
+  Upload, FileText, Sliders, Eye, Download, CheckCircle2,
+  X, RefreshCw, Printer, Sparkles, BookOpen,
   FileCheck, Minus, Plus, ToggleLeft, AlignLeft, List, HelpCircle,
-  Pencil, ArrowRight, ClipboardList, AlertCircle, Copy, ExternalLink,
+  Pencil, ArrowRight, ClipboardList, Copy, ExternalLink,
   LayoutTemplate, KeyRound,
 } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
@@ -110,7 +110,7 @@ const MOCK_QUESTIONS: Question[] = [
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const STEPS: { id: Step; label: string; icon: React.ComponentType<{ size?: number; className?: string }> }[] = [
+const STEPS: { id: Step; label: string; icon: React.ComponentType<{ size?: number | string; className?: string }> }[] = [
   { id: 'upload',     label: 'Upload',    icon: Upload      },
   { id: 'extracting', label: 'Extract',   icon: FileText    },
   { id: 'configure',  label: 'Configure', icon: Sliders     },
@@ -118,7 +118,7 @@ const STEPS: { id: Step; label: string; icon: React.ComponentType<{ size?: numbe
   { id: 'preview',    label: 'Preview',   icon: Eye         },
 ];
 
-const QUESTION_TYPES: { id: QuestionType; label: string; icon: React.ComponentType<{ size?: number; className?: string }>; desc: string }[] = [
+const QUESTION_TYPES: { id: QuestionType; label: string; icon: React.ComponentType<{ size?: number | string; className?: string }>; desc: string }[] = [
   { id: 'mcq',          label: 'Multiple Choice',   icon: List,          desc: '4 options' },
   { id: 'truefalse',    label: 'True / False',      icon: ToggleLeft,    desc: 'Binary'    },
   { id: 'shortanswer',  label: 'Short Answer',      icon: AlignLeft,     desc: '2–4 lines' },

@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Bell, ChevronDown, LogOut, User, Settings, CreditCard, Shield,
   Sun, Moon, Sparkles, CheckCheck, BookOpen, MessageSquare,
-  LayoutDashboard, Wrench, Zap, GraduationCap, X, AlignJustify,
+  LayoutDashboard, Wrench, Zap, GraduationCap,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -37,7 +37,7 @@ function useTheme() {
 
 interface Notification {
   id: number;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
+  icon: React.ComponentType<{ size?: number | string; className?: string }>;
   iconBg: string;
   title: string;
   body: string;
@@ -182,7 +182,7 @@ interface NavbarProps {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function Navbar({ onMenuClick }: NavbarProps) {
+export function Navbar({ onMenuClick: _onMenuClick }: NavbarProps) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();

@@ -15,7 +15,7 @@ import { Tool } from '../../types';
 
 const CATEGORIES = ['All', 'Writing', 'Development', 'Creative', 'Business'];
 
-const CATEGORY_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number; className?: string }>; gradient: string; accent: string }> = {
+const CATEGORY_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number | string; className?: string }>; gradient: string; accent: string }> = {
   Writing:     { icon: PenLine,   gradient: 'from-blue-500 to-cyan-500',     accent: 'text-blue-600'    },
   Development: { icon: Code2,     gradient: 'from-violet-500 to-purple-600', accent: 'text-violet-600'  },
   Creative:    { icon: Palette,   gradient: 'from-pink-500 to-rose-500',     accent: 'text-pink-600'    },

@@ -2,6 +2,10 @@
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
+  safelist: [
+    { pattern: /^(bg|border|text|ring)-(white|black)\/(4|5|6|8|10|12|15|20)$/ },
+    { pattern: /^(bg|border)-(white|black)\/(4|5|6|8|10|12|15|20)$/, variants: ['hover', 'dark'] },
+  ],
   theme: {
     // ─── Typography scale ────────────────────────────────────────────────
     fontSize: {
