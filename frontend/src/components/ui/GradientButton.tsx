@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 
-interface GradientButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface GradientButtonProps extends HTMLMotionProps<"button"> {
   children: ReactNode;
   variant?: 'primary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
