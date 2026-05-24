@@ -34,15 +34,15 @@ export function PageHeader({
       className={cn('flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-7', className)}
     >
       <div>
-        <div className="flex items-center gap-2.5 mb-1">
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">{title}</h1>
+        <div className="flex items-center gap-2.5 mb-1.5">
+          <h1 className="type-h1 !text-2xl">{title}</h1>
           {badge && (
-            <span className={cn('text-xs font-semibold px-2 py-0.5 rounded-full', badgeColors[badgeVariant])}>
+            <span className={cn('text-2xs font-semibold px-2.5 py-0.5 rounded-full', badgeColors[badgeVariant])}>
               {badge}
             </span>
           )}
         </div>
-        {subtitle && <p className="text-sm text-slate-500">{subtitle}</p>}
+        {subtitle && <p className="type-body-sm">{subtitle}</p>}
       </div>
       {actions && <div className="flex items-center gap-2 flex-shrink-0">{actions}</div>}
     </motion.div>

@@ -23,11 +23,11 @@ const variantClasses = {
   primary:
     'text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-primary hover:shadow-primary-lg border border-violet-500/20',
   outline:
-    'text-violet-600 bg-white border-2 border-violet-200 hover:border-violet-400 hover:bg-violet-50',
+    'text-violet-600 dark:text-violet-400 bg-white dark:bg-transparent border-2 border-violet-200 dark:border-violet-700 hover:border-violet-400 dark:hover:border-violet-500 hover:bg-violet-50 dark:hover:bg-violet-950/30',
   ghost:
-    'text-slate-600 bg-transparent hover:bg-slate-100 hover:text-slate-900',
+    'text-slate-600 dark:text-slate-300 bg-transparent hover:bg-slate-100 dark:hover:bg-white/8 hover:text-slate-900 dark:hover:text-slate-100',
   danger:
-    'text-white bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-400 hover:to-rose-400 shadow-lg shadow-red-200/50',
+    'text-white bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-400 hover:to-rose-400 shadow-lg shadow-red-200/50 dark:shadow-red-900/30',
 };
 
 export function GradientButton({

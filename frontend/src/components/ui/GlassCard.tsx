@@ -24,12 +24,12 @@ const paddingMap: Record<CardPadding, string> = {
 };
 
 const variantMap: Record<CardVariant, string> = {
-  default: 'bg-white/90 backdrop-blur-sm border border-slate-200/70 shadow-card',
-  stat:    'bg-white/90 backdrop-blur-sm border border-slate-200/70 shadow-card overflow-hidden',
-  feature: 'bg-white border border-slate-100 shadow-card',
+  default: 'bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/70 dark:border-white/8 shadow-card',
+  stat:    'bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm border border-slate-200/70 dark:border-white/8 shadow-card overflow-hidden',
+  feature: 'bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/8 shadow-card',
   ai:      'bg-gradient-to-br from-violet-600 to-purple-700 border-0 shadow-primary text-white',
-  glass:   'bg-white/60 backdrop-blur-xl border border-white/60 shadow-glass',
-  flat:    'bg-white border border-slate-100',
+  glass:   'bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/60 dark:border-white/8 shadow-glass',
+  flat:    'bg-white dark:bg-slate-900 border border-slate-100 dark:border-white/8',
 };
 
 const accentMap: Record<AccentColor, string> = {

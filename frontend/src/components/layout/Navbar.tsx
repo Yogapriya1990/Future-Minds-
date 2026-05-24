@@ -108,12 +108,12 @@ function NotificationPanel({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.96, y: -8 }}
       transition={{ duration: 0.18, ease: 'easeOut' }}
-      className="absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-dropdown border border-slate-100 z-20 overflow-hidden"
+      className="absolute right-0 top-full mt-2 w-80 bg-white dark:bg-slate-900 rounded-2xl shadow-dropdown border border-slate-100 dark:border-white/8 z-20 overflow-hidden"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-slate-100 dark:border-white/8">
         <div className="flex items-center gap-2">
-          <p className="text-sm font-bold text-slate-900">Notifications</p>
+          <p className="text-sm font-bold text-slate-900 dark:text-slate-100">Notifications</p>
           {items.filter((n) => !n.read).length > 0 && (
             <span className="bg-violet-100 text-violet-700 text-xs font-bold px-1.5 py-0.5 rounded-full">
               {items.filter((n) => !n.read).length}
@@ -130,20 +130,20 @@ function NotificationPanel({
       </div>
 
       {/* Items */}
-      <div className="max-h-80 overflow-y-auto divide-y divide-slate-50">
+      <div className="max-h-80 overflow-y-auto divide-y divide-slate-50 dark:divide-white/5">
         {groups.map((group) => {
           const groupItems = items.filter((n) => n.group === group);
           if (!groupItems.length) return null;
           return (
             <div key={group}>
-              <p className="px-4 py-2 text-2xs font-semibold text-slate-400 uppercase tracking-wider bg-slate-50/80">
+              <p className="px-4 py-2 text-2xs font-semibold text-slate-400 uppercase tracking-wider bg-slate-50/80 dark:bg-white/4">
                 {group}
               </p>
               {groupItems.map((n) => (
                 <motion.div
                   key={n.id}
                   whileHover={{ backgroundColor: 'rgba(248,250,252,1)' }}
-                  className={`flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors ${!n.read ? 'bg-violet-50/30' : ''}`}
+                  className={`flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors ${!n.read ? 'bg-violet-50/30 dark:bg-violet-950/20' : ''}`}
                   onClick={onClose}
                 >
                   <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${n.iconBg}`}>
@@ -151,7 +151,7 @@ function NotificationPanel({
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2 mb-0.5">
-                      <p className="text-xs font-semibold text-slate-900 truncate">{n.title}</p>
+                      <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 truncate">{n.title}</p>
                       {!n.read && <span className="w-1.5 h-1.5 rounded-full bg-violet-500 flex-shrink-0" />}
                     </div>
                     <p className="text-xs text-slate-500 leading-snug line-clamp-2">{n.body}</p>
@@ -165,8 +165,8 @@ function NotificationPanel({
       </div>
 
       {/* Footer */}
-      <div className="border-t border-slate-100 px-4 py-2.5">
-        <button className="w-full text-center text-xs text-violet-600 hover:text-violet-700 font-semibold transition-colors">
+      <div className="border-t border-slate-100 dark:border-white/8 px-4 py-2.5">
+        <button className="w-full text-center text-xs text-violet-600 dark:text-violet-400 hover:text-violet-700 font-semibold transition-colors">
           View all notifications
         </button>
       </div>
@@ -261,8 +261,8 @@ export function Navbar({ onMenuClick }: NavbarProps) {
       <motion.header
         className={`sticky top-0 z-30 flex-shrink-0 transition-all duration-300 ${
           scrolled
-            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80 shadow-xs'
-            : 'bg-white/70 backdrop-blur-md border-b border-slate-100/60'
+            ? 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/8 shadow-xs'
+            : 'bg-white/70 dark:bg-slate-950/60 backdrop-blur-md border-b border-slate-100/60 dark:border-white/5'
         }`}
       >
         {/* ── Top row ────────────────────────────────────────────────────── */}
@@ -272,14 +272,14 @@ export function Navbar({ onMenuClick }: NavbarProps) {
           <button
             onClick={() => setMobileMenuOpen((o) => !o)}
             aria-label="Toggle menu"
-            className="lg:hidden p-2 -ml-1 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors flex-shrink-0"
+            className="lg:hidden p-2 -ml-1 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-white/8 transition-colors flex-shrink-0"
           >
             <HamburgerIcon open={mobileMenuOpen} />
           </button>
 
           {/* Page title (mobile) / Breadcrumb hint (desktop) */}
           <div className="flex-1 min-w-0 lg:hidden">
-            <p className="text-sm font-semibold text-slate-800 truncate">{getPageTitle()}</p>
+            <p className="text-sm font-semibold text-slate-800 dark:text-slate-200 truncate">{getPageTitle()}</p>
           </div>
 
           {/* ── Desktop quick-nav ─────────────────────────────────────────── */}
@@ -290,7 +290,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                 <Link key={link.href} to={link.href} className="relative group px-3 py-2 rounded-lg">
                   <span
                     className={`flex items-center gap-1.5 text-sm font-medium transition-colors ${
-                      active ? 'text-violet-700' : 'text-slate-500 group-hover:text-slate-900'
+                      active ? 'text-violet-600 dark:text-violet-400' : 'text-slate-500 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100'
                     }`}
                   >
                     <link.icon size={15} className={active ? 'text-violet-600' : 'text-slate-400 group-hover:text-slate-600'} />
@@ -324,7 +324,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
               whileTap={{ scale: 0.9 }}
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              className="relative p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors overflow-hidden"
+              className="relative p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-white/8 transition-colors overflow-hidden"
             >
               <AnimatePresence mode="wait" initial={false}>
                 {dark ? (
@@ -359,7 +359,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                 whileTap={{ scale: 0.93 }}
                 onClick={() => { setNotifOpen((o) => !o); setDropdownOpen(false); }}
                 aria-label="Notifications"
-                className="relative p-2 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                className="relative p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100 hover:bg-slate-100 dark:hover:bg-white/8 transition-colors"
               >
                 <Bell size={17} />
                 <AnimatePresence>
@@ -394,7 +394,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                 <motion.button
                   whileTap={{ scale: 0.97 }}
                   onClick={() => { setDropdownOpen((o) => !o); setNotifOpen(false); }}
-                  className="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-xl hover:bg-slate-100 transition-colors"
+                  className="flex items-center gap-2 pl-1.5 pr-2.5 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-white/8 transition-colors"
                   aria-expanded={dropdownOpen}
                   aria-haspopup="true"
                 >
@@ -406,7 +406,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                     </div>
                   )}
                   <div className="hidden sm:block text-left">
-                    <p className="text-xs font-semibold text-slate-900 leading-tight truncate max-w-[110px]">
+                    <p className="text-xs font-semibold text-slate-900 dark:text-slate-100 leading-tight truncate max-w-[110px]">
                       {user.full_name ?? user.email}
                     </p>
                     <p className="text-2xs text-slate-400 capitalize font-medium">{user.subscription_tier}</p>
@@ -424,10 +424,10 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                       animate={{ opacity: 1, scale: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95, y: -8 }}
                       transition={{ duration: 0.16, ease: 'easeOut' }}
-                      className="absolute right-0 top-full mt-2 w-60 bg-white rounded-2xl shadow-dropdown border border-slate-100 overflow-hidden z-20"
+                      className="absolute right-0 top-full mt-2 w-60 bg-white dark:bg-slate-900 rounded-2xl shadow-dropdown border border-slate-100 dark:border-white/8 overflow-hidden z-20"
                     >
                       {/* User info */}
-                      <div className="px-4 py-3.5 border-b border-slate-100 flex items-center gap-3">
+                      <div className="px-4 py-3.5 border-b border-slate-100 dark:border-white/8 flex items-center gap-3">
                         {user.avatar_url ? (
                           <img src={user.avatar_url} className="w-9 h-9 rounded-xl object-cover" alt="avatar" />
                         ) : (
@@ -436,7 +436,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                           </div>
                         )}
                         <div className="min-w-0">
-                          <p className="text-sm font-bold text-slate-900 truncate">{user.full_name ?? 'User'}</p>
+                          <p className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">{user.full_name ?? 'User'}</p>
                           <p className="text-xs text-slate-400 truncate">{user.email}</p>
                           <span className={`inline-flex items-center mt-0.5 text-2xs font-semibold px-1.5 py-0.5 rounded-full ${
                             user.subscription_tier === 'pro' || user.subscription_tier === 'enterprise'
@@ -460,7 +460,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                             <Link
                               to={href}
                               onClick={() => setDropdownOpen(false)}
-                              className="group flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition-colors"
+                              className="group flex items-center justify-between px-4 py-2.5 text-sm text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/6 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
                             >
                               <div className="flex items-center gap-2.5">
                                 <Icon size={15} className="text-slate-400 group-hover:text-violet-500 transition-colors" />
@@ -490,10 +490,10 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                       )}
 
                       {/* Sign out */}
-                      <div className="border-t border-slate-100 py-1.5">
+                      <div className="border-t border-slate-100 dark:border-white/8 py-1.5">
                         <button
                           onClick={handleLogout}
-                          className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors"
+                          className="flex items-center gap-2.5 w-full px-4 py-2.5 text-sm text-red-500 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 hover:text-red-600 transition-colors"
                         >
                           <LogOut size={15} />
                           Sign Out
@@ -515,7 +515,7 @@ export function Navbar({ onMenuClick }: NavbarProps) {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.22, ease: 'easeInOut' }}
-              className="lg:hidden overflow-hidden border-t border-slate-100 bg-white/95 backdrop-blur-md"
+              className="lg:hidden overflow-hidden border-t border-slate-100 dark:border-white/8 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md"
             >
               <div className="grid grid-cols-3 gap-1 px-3 py-3">
                 {NAV_LINKS.map((link) => {
@@ -526,8 +526,8 @@ export function Navbar({ onMenuClick }: NavbarProps) {
                       to={link.href}
                       className={`flex flex-col items-center gap-1 py-2.5 px-2 rounded-xl text-center transition-all ${
                         active
-                          ? 'bg-violet-50 text-violet-700'
-                          : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                          ? 'bg-violet-50 dark:bg-violet-950/40 text-violet-700 dark:text-violet-400'
+                          : 'text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/6 hover:text-slate-900 dark:hover:text-slate-100'
                       }`}
                     >
                       <link.icon size={18} className={active ? 'text-violet-600' : 'text-slate-400'} />

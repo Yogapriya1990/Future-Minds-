@@ -18,7 +18,7 @@ export const AnimatedInput = forwardRef<HTMLInputElement, AnimatedInputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-slate-700"
+            className="block text-sm font-medium text-slate-700 dark:text-slate-300"
           >
             {label}
           </label>

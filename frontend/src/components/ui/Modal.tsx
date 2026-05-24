@@ -88,20 +88,20 @@ export function Modal({
             exit="exit"
             transition={{ duration: shouldReduce ? 0 : 0.2, ease: [0.25, 0.1, 0.25, 1] }}
             className={cn(
-              'relative w-full bg-white rounded-2xl shadow-modal border border-slate-100 overflow-hidden z-10',
+              'relative w-full bg-white dark:bg-slate-900 rounded-2xl shadow-modal border border-slate-100 dark:border-white/8 overflow-hidden z-10',
               sizeMap[size],
               className
             )}
           >
             {/* Header */}
             {(title || showCloseButton) && (
-              <div className={cn('flex items-start justify-between px-5 pt-5', description ? 'pb-0' : 'pb-4 border-b border-slate-100')}>
+              <div className={cn('flex items-start justify-between px-5 pt-5', description ? 'pb-0' : 'pb-4 border-b border-slate-100 dark:border-white/8')}>
                 <div>
                   {title && (
-                    <h2 className="text-base font-bold text-slate-900 leading-tight">{title}</h2>
+                    <h2 className="text-base font-bold text-slate-900 dark:text-slate-100 leading-tight">{title}</h2>
                   )}
                   {description && (
-                    <p className="text-sm text-slate-500 mt-1">{description}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">{description}</p>
                   )}
                 </div>
                 {showCloseButton && (
@@ -125,7 +125,7 @@ export function Modal({
 
             {/* Footer */}
             {footer && (
-              <div className="px-5 pb-5 pt-2 border-t border-slate-100 flex items-center justify-end gap-2.5">
+              <div className="px-5 pb-5 pt-2 border-t border-slate-100 dark:border-white/8 flex items-center justify-end gap-2.5">
                 {footer}
               </div>
             )}
