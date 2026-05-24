@@ -1,13 +1,106 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Navbar } from '../../components/layout/Navbar';
+import { Zap, Play, Pause, Clock, Webhook, Hand, ChevronRight, BarChart2, Plus } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
-import { GlassCard } from '../../components/ui/GlassCard';
-import { GradientButton } from '../../components/ui/GradientButton';
-import { AnimatedList } from '../../components/ui/AnimatedList';
+import {
+  GlassCard, GradientButton, AnimatedList, PageHeader,
+  StatusBadge, EmptyState, Spinner,
+} from '../../components/ui';
 import api from '../../services/api';
 import { Workflow } from '../../types';
+
+const TRIGGER_CONFIG: Record<string, { icon: React.ComponentType<{ size?: number; className?: string }>; label: string }> = {
+  manual:    { icon: Hand,    label: 'Manual'    },
+  scheduled: { icon: Clock,   label: 'Scheduled' },
+  webhook:   { icon: Webhook, label: 'Webhook'   },
+};
+
+function WorkflowCard({
+  wf,
+  onToggle,
+  onRun,
+  isRunning,
+  isToggling,
+}: {
+  wf: Workflow;
+  onToggle: () => void;
+  onRun: () => void;
+  isRunning: boolean;
+  isToggling: boolean;
+}) {
+  const TriggerIcon = TRIGGER_CONFIG[wf.trigger_type]?.icon ?? Hand;
+  const triggerLabel = TRIGGER_CONFIG[wf.trigger_type]?.label ?? wf.trigger_type;
+
+  return (
+    <GlassCard accent={wf.is_active ? 'emerald' : 'none'} hover className="group">
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-3.5 min-w-0">
+          {/* Status icon */}
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors ${
+            wf.is_active
+              ? 'bg-emerald-50 border border-emerald-100'
+              : 'bg-slate-50 border border-slate-100'
+          }`}>
+            <Zap size={18} className={wf.is_active ? 'text-emerald-600' : 'text-slate-400'} />
+          </div>
+
+          <div className="min-w-0">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <h3 className="text-sm font-bold text-slate-900 truncate">{wf.name}</h3>
+              <StatusBadge variant={wf.is_active ? 'active' : 'inactive'} dot />
+            </div>
+            <p className="text-xs text-slate-500 mb-2 line-clamp-1">{wf.description}</p>
+            <div className="flex items-center gap-3">
+              <span className="flex items-center gap-1 text-xs text-slate-400">
+                <TriggerIcon size={11} />
+                {triggerLabel}
+              </span>
+              <span className="text-xs text-slate-400">
+                {wf.steps?.length ?? 0} step{(wf.steps?.length ?? 0) !== 1 ? 's' : ''}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <Link
+            to={`/automations/${wf.id}/runs`}
+            className="p-2 rounded-lg text-slate-400 hover:text-violet-600 hover:bg-violet-50 transition-colors"
+            title="View logs"
+          >
+            <BarChart2 size={15} />
+          </Link>
+
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={onRun}
+            disabled={isRunning}
+            className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-violet-50 text-violet-700 hover:bg-violet-100 transition-colors disabled:opacity-50"
+          >
+            <Play size={12} className="fill-current" />
+            {isRunning ? 'Running…' : 'Run'}
+          </motion.button>
+
+          <motion.button
+            whileTap={{ scale: 0.95 }}
+            onClick={onToggle}
+            disabled={isToggling}
+            className={`flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors disabled:opacity-50 ${
+              wf.is_active
+                ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'
+            }`}
+          >
+            {wf.is_active ? <Pause size={12} /> : <Play size={12} />}
+            {wf.is_active ? 'Pause' : 'Activate'}
+          </motion.button>
+        </div>
+      </div>
+    </GlassCard>
+  );
+}
 
 export default function WorkflowListPage() {
   const navigate = useNavigate();
@@ -27,47 +120,53 @@ export default function WorkflowListPage() {
     mutationFn: (id: number) => api.post(`/api/workflows/${id}/run`, {}),
   });
 
+  const activeCount = workflows.filter((w) => w.is_active).length;
+
   return (
     <PageWrapper>
-      <Navbar />
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">Automations</h1>
-          <GradientButton onClick={() => navigate('/automations/new')}>+ New Workflow</GradientButton>
-        </div>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8">
+        <PageHeader
+          title="Automations"
+          subtitle="Build and manage your AI workflows"
+          badge={activeCount > 0 ? `${activeCount} active` : undefined}
+          badgeVariant="emerald"
+          actions={
+            <GradientButton onClick={() => navigate('/automations/new')} leftIcon={<Plus size={15} />}>
+              New Workflow
+            </GradientButton>
+          }
+        />
 
         {isLoading ? (
-          <div className="flex justify-center py-20"><div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" /></div>
+          <Spinner label="Loading workflows..." />
         ) : workflows.length === 0 ? (
-          <GlassCard className="text-center py-12">
-            <div className="text-4xl mb-4">⚡</div>
-            <h3 className="font-semibold text-gray-800 mb-2">No workflows yet</h3>
-            <p className="text-gray-500 mb-4">Build your first automation workflow</p>
-            <GradientButton onClick={() => navigate('/automations/new')}>Create Workflow</GradientButton>
-          </GlassCard>
+          <EmptyState
+            icon={<Zap size={28} />}
+            title="No workflows yet"
+            description="Automate repetitive tasks with AI-powered workflows. Build your first one in minutes."
+            action={
+              <GradientButton onClick={() => navigate('/automations/new')} leftIcon={<Plus size={15} />}>
+                Create Workflow
+              </GradientButton>
+            }
+          />
         ) : (
-          <AnimatedList className="space-y-4">
-            {workflows.map((wf) => (
-              <GlassCard key={wf.id}>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className={`w-2 h-2 rounded-full ${wf.is_active ? 'bg-green-400' : 'bg-gray-300'}`} />
-                      <h3 className="font-semibold text-gray-900">{wf.name}</h3>
-                    </div>
-                    <p className="text-sm text-gray-500 mt-1">{wf.description}</p>
-                    <div className="flex gap-2 mt-2">
-                      <span className="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{wf.trigger_type}</span>
-                      <span className="text-xs text-gray-400">{wf.steps?.length ?? 0} steps</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => runMutation.mutate(wf.id)} className="text-sm px-3 py-1.5 bg-purple-50 text-purple-600 rounded-lg hover:bg-purple-100">Run</motion.button>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => toggleMutation.mutate(wf.id)} className={`text-sm px-3 py-1.5 rounded-lg ${wf.is_active ? 'bg-gray-100 text-gray-600' : 'bg-green-50 text-green-600'}`}>{wf.is_active ? 'Pause' : 'Activate'}</motion.button>
-                    <Link to={`/automations/${wf.id}/runs`} className="text-sm text-gray-400 hover:text-gray-600">Logs</Link>
-                  </div>
-                </div>
-              </GlassCard>
+          <AnimatedList className="space-y-3">
+            {workflows.map((wf, i) => (
+              <motion.div
+                key={wf.id}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.07, duration: 0.3 }}
+              >
+                <WorkflowCard
+                  wf={wf}
+                  onToggle={() => toggleMutation.mutate(wf.id)}
+                  onRun={() => runMutation.mutate(wf.id)}
+                  isRunning={runMutation.isPending && runMutation.variables === wf.id}
+                  isToggling={toggleMutation.isPending && toggleMutation.variables === wf.id}
+                />
+              </motion.div>
             ))}
           </AnimatedList>
         )}
