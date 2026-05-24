@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Navbar } from '../../components/layout/Navbar';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { GradientButton } from '../../components/ui/GradientButton';
@@ -37,7 +36,6 @@ export default function CourseDetailPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {course.thumbnail_url && <img src={course.thumbnail_url} alt={course.title} className="w-full h-64 object-cover rounded-2xl mb-6" />}

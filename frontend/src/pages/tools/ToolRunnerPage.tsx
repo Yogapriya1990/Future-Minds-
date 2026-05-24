@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Navbar } from '../../components/layout/Navbar';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { GradientButton } from '../../components/ui/GradientButton';
@@ -41,7 +40,6 @@ export default function ToolRunnerPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-3xl mx-auto px-4 py-8">
         {tool && (
           <div className="mb-6">

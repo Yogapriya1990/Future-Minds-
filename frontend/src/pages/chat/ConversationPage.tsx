@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Navbar } from '../../components/layout/Navbar';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GradientButton } from '../../components/ui/GradientButton';
 import api from '../../services/api';
@@ -79,7 +78,6 @@ export default function ConversationPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-3xl mx-auto px-4 py-4 flex flex-col" style={{ height: 'calc(100vh - 64px)' }}>
         <div className="flex-1 overflow-y-auto space-y-4 py-4">
           {allMessages.map((msg) => (

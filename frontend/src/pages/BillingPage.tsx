@@ -1,6 +1,5 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { Navbar } from '../components/layout/Navbar';
 import { PageWrapper } from '../components/layout/PageWrapper';
 import { GlassCard } from '../components/ui/GlassCard';
 import { GradientButton } from '../components/ui/GradientButton';
@@ -26,7 +25,6 @@ export default function BillingPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-2xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Billing</h1>
         {sub ? (

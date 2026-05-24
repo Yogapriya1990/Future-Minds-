@@ -89,8 +89,8 @@ export default function App() {
             <Route path="/learn/:id" element={<ProtectedRoute><Suspense fallback={<Loading />}><CourseDetailPage /></Suspense></ProtectedRoute>} />
             <Route path="/learn/:courseId/lesson/:lessonId" element={<ProtectedRoute><Suspense fallback={<Loading />}><LessonViewerPage /></Suspense></ProtectedRoute>} />
             <Route path="/teach" element={<ProtectedRoute><Suspense fallback={<Loading />}><InstructorDashboardPage /></Suspense></ProtectedRoute>} />
-            <Route path="/teach/courses/new" element={<ProtectedRoute><Suspense fallback={<Loading />}><CreateCoursePage /></Suspense></ProtectedRoute>} />
-            <Route path="/teach/courses/:id/edit" element={<ProtectedRoute><Suspense fallback={<Loading />}><EditCoursePage /></Suspense></ProtectedRoute>} />
+            <Route path="/teach/create" element={<ProtectedRoute><Suspense fallback={<Loading />}><CreateCoursePage /></Suspense></ProtectedRoute>} />
+            <Route path="/teach/edit/:id" element={<ProtectedRoute><Suspense fallback={<Loading />}><EditCoursePage /></Suspense></ProtectedRoute>} />
             <Route path="/tools" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolMarketplacePage /></Suspense></ProtectedRoute>} />
             <Route path="/tools/history" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolHistoryPage /></Suspense></ProtectedRoute>} />
             <Route path="/tools/worksheet" element={<ProtectedRoute><Suspense fallback={<Loading />}><WorksheetGeneratorPage /></Suspense></ProtectedRoute>} />

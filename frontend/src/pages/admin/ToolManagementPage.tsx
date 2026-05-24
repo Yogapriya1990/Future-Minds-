@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Navbar } from '../../components/layout/Navbar';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { GradientButton } from '../../components/ui/GradientButton';
@@ -10,7 +9,7 @@ import { AnimatedList } from '../../components/ui/AnimatedList';
 import api from '../../services/api';
 import { Tool } from '../../types';
 
-const BLANK = { name: '', slug: '', description: '', category: '', system_prompt: '', model: 'gpt-4o-mini', is_premium: false };
+const BLANK = { name: '', slug: '', description: '', category: '', prompt_template: '', model: 'gpt-4o', is_premium: false };
 
 export default function ToolManagementPage() {
   const qc = useQueryClient();
@@ -36,7 +35,6 @@ export default function ToolManagementPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-3xl font-bold text-gray-900">Tool Management</h1>
@@ -55,10 +53,8 @@ export default function ToolManagementPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">Model</label>
                   <select value={form.model} onChange={(e) => set('model', e.target.value)}
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm">
-                    <option value="gpt-4o-mini">GPT-4o Mini</option>
                     <option value="gpt-4o">GPT-4o</option>
                     <option value="claude-sonnet">Claude Sonnet</option>
-                    <option value="claude-haiku">Claude Haiku</option>
                   </select>
                 </div>
               </div>
@@ -68,8 +64,8 @@ export default function ToolManagementPage() {
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm resize-none" />
               </div>
               <div className="mt-3">
-                <label className="block text-sm font-medium text-gray-700 mb-1">System Prompt</label>
-                <textarea value={form.system_prompt} onChange={(e) => set('system_prompt', e.target.value)} rows={3}
+                <label className="block text-sm font-medium text-gray-700 mb-1">Prompt Template</label>
+                <textarea value={form.prompt_template} onChange={(e) => set('prompt_template', e.target.value)} rows={3}
                   className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/60 focus:outline-none focus:ring-2 focus:ring-purple-400 text-sm resize-none" />
               </div>
               <div className="flex items-center gap-3 mt-3">

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Navbar } from '../../components/layout/Navbar';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { GradientButton } from '../../components/ui/GradientButton';
@@ -12,7 +11,7 @@ import { Course } from '../../types';
 export default function InstructorDashboardPage() {
   const { data: courses = [], isLoading } = useQuery<Course[]>({
     queryKey: ['my-courses'],
-    queryFn: () => api.get('/api/courses?my=true').then((r) => r.data),
+    queryFn: () => api.get('/api/courses/my').then((r) => r.data),
   });
 
   const published = courses.filter((c) => c.is_published);
@@ -28,7 +27,6 @@ export default function InstructorDashboardPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Instructor Dashboard</h1>

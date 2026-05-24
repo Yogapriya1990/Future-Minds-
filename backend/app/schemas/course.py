@@ -33,6 +33,10 @@ class CourseResponse(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class CourseDetailResponse(CourseResponse):
+    lessons: list["LessonResponse"] = []
+
+
 class LessonCreate(BaseModel):
     title: str
     content: str
