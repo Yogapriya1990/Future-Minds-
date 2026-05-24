@@ -16,6 +16,7 @@ export function GradientButton({
   isLoading,
   className,
   disabled,
+  onAnimationStart: _onAnimationStart,
   ...props
 }: GradientButtonProps) {
   const sizeClasses = {
