@@ -9,6 +9,12 @@ export { EmptyState } from './EmptyState';
 export { Spinner } from './Spinner';
 export { FilterBar } from './FilterBar';
 export { FadeIn, Stagger, StaggerItem } from './FadeIn';
+export {
+  EmptyStateCourses,
+  EmptyStateWorksheets,
+  EmptyStateAIHistory,
+  EmptyStateUploads,
+} from './EmptyStates';
 export { Modal, ConfirmModal } from './Modal';
 export {
   SkeletonText, SkeletonAvatar, SkeletonStat, SkeletonCard,

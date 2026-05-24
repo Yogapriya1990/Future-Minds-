@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, Star, Users, Clock, ChevronRight } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
-import { GlassCard, PageHeader, StatusBadge, EmptyState, Spinner, FilterBar, AnimatedList } from '../../components/ui';
+import { GlassCard, PageHeader, StatusBadge, Spinner, FilterBar, AnimatedList, EmptyStateCourses } from '../../components/ui';
 import api from '../../services/api';
 import { Course } from '../../types';
 
@@ -133,10 +133,9 @@ export default function CourseCatalogPage() {
         {isLoading ? (
           <Spinner label="Loading courses..." />
         ) : courses.length === 0 ? (
-          <EmptyState
-            icon={<BookOpen size={28} />}
-            title="No courses found"
-            description="Try adjusting your filters or check back later for new content."
+          <EmptyStateCourses
+            variant={category !== 'All' || difficulty !== 'All' ? 'filtered' : 'empty'}
+            onClearFilters={() => { setCategory('All'); setDifficulty('All'); }}
           />
         ) : (
           <AnimatedList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GradientButton } from '../../components/ui/GradientButton';
+import { EmptyStateUploads } from '../../components/ui/EmptyStates';
 import { cn } from '../../lib/utils';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -183,7 +184,7 @@ function StepProgress({ current }: { current: Step }) {
   );
 }
 
-function DropZone({ onFile }: { onFile: (file: File, preview: string) => void }) {
+function DropZone({ onFile, onUseSample }: { onFile: (file: File, preview: string) => void; onUseSample?: () => void }) {
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -231,30 +232,14 @@ function DropZone({ onFile }: { onFile: (file: File, preview: string) => void })
             </div>
           </motion.div>
         ) : (
-          <motion.div key="idle" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} className="flex flex-col items-center gap-4">
-            <div className="relative">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-100 to-purple-100 border border-violet-200 flex items-center justify-center group-hover:from-violet-200 group-hover:to-purple-200 transition-all">
-                <ImageIcon size={28} className="text-violet-500" />
-              </div>
-              <div className="absolute -bottom-1.5 -right-1.5 w-7 h-7 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-primary">
-                <Plus size={14} className="text-white" />
-              </div>
-            </div>
-            <div className="text-center">
-              <p className="text-sm font-bold text-slate-700 mb-1">Drop your worksheet image here</p>
-              <p className="text-xs text-slate-400">or <span className="text-violet-600 font-semibold underline underline-offset-2">browse files</span></p>
-              <p className="text-xs text-slate-300 mt-2">PNG, JPG, PDF up to 10 MB</p>
-            </div>
+          <motion.div key="idle" initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }}>
+            <EmptyStateUploads
+              onBrowse={() => inputRef.current?.click()}
+              onUseSample={onUseSample}
+            />
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* Supported formats */}
-      <div className="flex items-center gap-2 mt-2">
-        {['PNG', 'JPG', 'PDF'].map((fmt) => (
-          <span key={fmt} className="text-2xs font-semibold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{fmt}</span>
-        ))}
-      </div>
     </motion.div>
   );
 }
@@ -716,15 +701,7 @@ export default function WorksheetGeneratorPage() {
                     <h2 className="text-sm font-bold text-slate-900 mb-4 flex items-center gap-2">
                       <Upload size={15} className="text-violet-600" /> Upload Material
                     </h2>
-                    <DropZone onFile={handleFile} />
-                    <div className="relative my-4">
-                      <div className="absolute inset-y-0 left-0 right-0 flex items-center"><div className="w-full border-t border-slate-100" /></div>
-                      <div className="relative flex justify-center"><span className="bg-white px-3 text-xs text-slate-400 font-medium">or try a sample</span></div>
-                    </div>
-                    <button onClick={handleUseSample} className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border-2 border-dashed border-violet-200 text-violet-600 text-sm font-semibold hover:bg-violet-50 hover:border-violet-400 transition-all">
-                      <Sparkles size={15} />
-                      Use Sample (Water Cycle)
-                    </button>
+                    <DropZone onFile={handleFile} onUseSample={handleUseSample} />
                   </div>
 
                   {/* Tips */}
