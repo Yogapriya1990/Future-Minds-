@@ -1,9 +1,9 @@
-import { motion } from 'framer-motion';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
 import { Loader2 } from 'lucide-react';
 
-interface GradientButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface GradientButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   children: ReactNode;
   variant?: 'primary' | 'outline' | 'ghost' | 'danger';
   size?: 'xs' | 'sm' | 'md' | 'lg';
@@ -53,7 +53,7 @@ export function GradientButton({
         (disabled || isLoading) && 'opacity-60 cursor-not-allowed pointer-events-none',
         className
       )}
-      {...(props as object)}
+      {...props}
     >
       {isLoading ? (
         <>

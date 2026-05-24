@@ -5,7 +5,7 @@ import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { GradientButton } from '../../components/ui/GradientButton';
 import api from '../../services/api';
-import { Course, Lesson, Enrollment } from '../../types';
+import { Course, Lesson } from '../../types';
 
 interface CourseDetail extends Course {
   lessons?: Lesson[];

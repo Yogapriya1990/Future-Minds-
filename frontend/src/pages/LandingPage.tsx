@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   Sparkles, Brain, BookOpen, Zap, Users, GraduationCap, ArrowRight,
-  Bot, BarChart3, Shield, Globe, Star, CheckCircle2, Play,
+  Bot, BarChart3, Shield, Star, CheckCircle2, Play,
   Layers, Cpu, FlaskConical, Lightbulb, MessageSquare, ChevronRight,
 } from 'lucide-react';
 

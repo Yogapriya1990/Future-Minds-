@@ -1,6 +1,5 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef, ReactNode } from 'react';
-import { cn } from '../../lib/utils';
 
 type Direction = 'up' | 'down' | 'left' | 'right' | 'none';
 

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { motion, useMotionValue, animate } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FadeIn, Stagger, StaggerItem } from '../components/ui/FadeIn';
 import { SkeletonDashboard } from '../components/ui/Skeleton';
 import {
@@ -10,14 +10,13 @@ import {
 } from 'recharts';
 import {
   Zap, GraduationCap, Wrench, Flame, MessageSquare, BookOpen,
-  ArrowUpRight, TrendingUp, CheckCircle2, Clock, Play, Star,
+  ArrowUpRight, CheckCircle2, Clock, Play, Star,
   Target, Award, ChevronRight, Sparkles, BarChart2, Users,
   FileText, Bot, Cpu, Code2, Calculator, PenLine, Calendar,
   CircleDot, Trophy,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { AppLayout } from '../components/layout/AppLayout';
-import { GlassCard } from '../components/ui/GlassCard';
 import { GradientButton } from '../components/ui/GradientButton';
 import api from '../services/api';
 

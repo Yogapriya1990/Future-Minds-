@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  Wrench, PenLine, Code2, Palette, Briefcase, Bot, Zap, BarChart2,
-  History, Sparkles, ChevronRight,
+  Wrench, PenLine, Code2, Palette, Briefcase, Bot,
+  History, ChevronRight,
 } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import {

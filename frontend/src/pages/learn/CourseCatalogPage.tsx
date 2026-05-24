@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, Star, Users, Clock, ChevronRight } from 'lucide-react';
+import { BookOpen, Star, Users } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard, PageHeader, StatusBadge, Spinner, FilterBar, AnimatedList, EmptyStateCourses } from '../../components/ui';
 import api from '../../services/api';

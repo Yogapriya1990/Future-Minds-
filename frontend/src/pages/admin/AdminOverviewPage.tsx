@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Users, Activity, BookOpen, DollarSign,
-  ChevronRight, Settings, BarChart3, Wrench, GraduationCap,
+  ChevronRight, BarChart3, Wrench,
 } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard, StatCard, PageHeader, Spinner } from '../../components/ui';
