@@ -120,19 +120,20 @@ async def send_message(
 
         try:
             if conv.model.value.startswith("gpt") and openai_client:
-                async with openai_client.chat.completions.stream(
+                stream = await openai_client.chat.completions.create(
                     model=conv.model.value,
                     messages=messages,
                     max_tokens=2048,
-                ) as stream:
-                    async for chunk in stream:
-                        delta = chunk.choices[0].delta.content or ""
-                        if delta:
-                            full_content += delta
-                            yield f"data: {json.dumps({'content': delta})}\n\n"
-                    usage = stream.get_final_usage()
-                    if usage:
-                        tokens_used = usage.total_tokens
+                    stream=True,
+                    stream_options={"include_usage": True},
+                )
+                async for chunk in stream:
+                    if chunk.choices and chunk.choices[0].delta.content:
+                        delta = chunk.choices[0].delta.content
+                        full_content += delta
+                        yield f"data: {json.dumps({'content': delta})}\n\n"
+                    if chunk.usage:
+                        tokens_used = chunk.usage.total_tokens
             elif conv.model.value.startswith("claude") and anthropic_client:
                 model_map = {
                     "claude-sonnet": "claude-sonnet-4-6",
