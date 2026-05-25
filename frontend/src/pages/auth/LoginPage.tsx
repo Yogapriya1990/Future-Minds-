@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Mail, Lock, Sparkles, ArrowRight } from 'lucide-react';
+import { Mail, Lock, ArrowRight } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { MeshBackground } from '../../components/layout/MeshBackground';
 import { GradientButton } from '../../components/ui/GradientButton';
@@ -41,9 +41,7 @@ export default function LoginPage() {
 
         <div className="relative z-10">
           <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center shadow-lg">
-              <Sparkles size={17} className="text-white" />
-            </div>
+            <img src="/fm.svg" alt="Future Minds" className="w-9 h-9 rounded-xl shadow-lg" />
             <span className="text-lg font-bold text-white tracking-tight">Future Minds AI</span>
           </div>
         </div>
@@ -86,9 +84,7 @@ export default function LoginPage() {
         >
           {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-8 lg:hidden">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center">
-              <Sparkles size={15} className="text-white" />
-            </div>
+            <img src="/fm.svg" alt="Future Minds" className="w-8 h-8 rounded-xl" />
             <span className="text-base font-bold text-slate-900">Future Minds AI</span>
           </div>
 

@@ -44,9 +44,11 @@ export function SidebarContent() {
       {/* Logo */}
       <div className="px-5 py-5 border-b border-white/8">
         <Link to="/dashboard" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-400 to-purple-600 flex items-center justify-center shadow-lg shadow-purple-900/30 group-hover:scale-105 transition-transform">
-            <Sparkles size={15} className="text-white" />
-          </div>
+          <img
+            src="/fm.svg"
+            alt="Future Minds"
+            className="w-8 h-8 rounded-xl group-hover:scale-105 transition-transform"
+          />
           <div>
             <span className="text-sm font-bold text-white tracking-tight leading-none block">Future Minds</span>
             <span className="text-2xs text-slate-500 font-medium">AI Platform</span>
