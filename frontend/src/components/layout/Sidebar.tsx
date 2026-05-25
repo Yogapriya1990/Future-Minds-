@@ -45,9 +45,9 @@ export function SidebarContent() {
       <div className="px-5 py-5 border-b border-white/8">
         <Link to="/dashboard" className="flex items-center gap-2.5 group">
           <img
-            src="/logo.svg"
+            src="/logo-white.svg"
             alt="Future Minds"
-            className="w-8 h-8 rounded-xl invert group-hover:scale-105 transition-transform"
+            className="w-8 h-8 group-hover:scale-105 transition-transform"
           />
           <div>
             <span className="text-sm font-bold text-white tracking-tight leading-none block">Future Minds</span>
