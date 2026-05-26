@@ -1,10 +1,11 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
-  Sparkles, Brain, BookOpen, Zap, Users, GraduationCap, ArrowRight,
+  Brain, BookOpen, Zap, Users, GraduationCap, ArrowRight,
   Bot, BarChart3, Shield, Star, CheckCircle2, Play,
   Layers, Cpu, FlaskConical, Lightbulb, MessageSquare, ChevronRight,
+  ChevronDown, Sparkles,
 } from 'lucide-react';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -21,10 +22,22 @@ const SCHOOLS = [
   'Oxford Digital', 'Cambridge AI Lab', 'Berkeley EECS',
 ];
 
+const AI_TOOLS = [
+  'ChatGPT', 'Claude', 'Python', 'LangChain', 'Hugging Face',
+  'n8n', 'Flowise', 'Stable Diffusion', 'Pinecone', 'Whisper',
+  'Midjourney', 'AutoGen',
+];
+
+const TRUST_BADGES = [
+  { icon: Sparkles, label: 'GPT-4o Powered' },
+  { icon: BookOpen, label: '1,200+ Lessons' },
+  { icon: CheckCircle2, label: 'No Credit Card' },
+  { icon: Zap, label: 'Cancel Anytime' },
+];
+
 const FEATURES = [
   {
     icon: Brain,
-    color: 'from-violet-500 to-purple-600',
     bg: 'bg-violet-50',
     iconColor: 'text-violet-600',
     title: 'Personalized AI Tutor',
@@ -32,7 +45,6 @@ const FEATURES = [
   },
   {
     icon: BookOpen,
-    color: 'from-blue-500 to-cyan-500',
     bg: 'bg-blue-50',
     iconColor: 'text-blue-600',
     title: '1,200+ AI Courses',
@@ -40,7 +52,6 @@ const FEATURES = [
   },
   {
     icon: FlaskConical,
-    color: 'from-emerald-500 to-teal-500',
     bg: 'bg-emerald-50',
     iconColor: 'text-emerald-600',
     title: 'Live AI Sandbox',
@@ -48,7 +59,6 @@ const FEATURES = [
   },
   {
     icon: BarChart3,
-    color: 'from-amber-500 to-orange-500',
     bg: 'bg-amber-50',
     iconColor: 'text-amber-600',
     title: 'Progress Analytics',
@@ -56,7 +66,6 @@ const FEATURES = [
   },
   {
     icon: Users,
-    color: 'from-pink-500 to-rose-500',
     bg: 'bg-pink-50',
     iconColor: 'text-pink-600',
     title: 'Collaborative Classrooms',
@@ -64,7 +73,6 @@ const FEATURES = [
   },
   {
     icon: Shield,
-    color: 'from-indigo-500 to-violet-500',
     bg: 'bg-indigo-50',
     iconColor: 'text-indigo-600',
     title: 'Safe for Schools',
@@ -111,6 +119,39 @@ const PRICING_HIGHLIGHTS = [
   'Priority support',
 ];
 
+const FAQS = [
+  {
+    q: 'Is it really free to start?',
+    a: 'Yes — no credit card required. You get full access to the first module of every course, the AI chat, and the sandbox for free. Upgrade to Pro anytime for unlimited access.',
+  },
+  {
+    q: 'What AI tools are included?',
+    a: 'We cover ChatGPT, Claude, Python, LangChain, Hugging Face, n8n, Flowise, Stable Diffusion, Pinecone, and more. The curriculum is updated every quarter as new tools emerge.',
+  },
+  {
+    q: 'Can I use it for my classroom or school?',
+    a: 'Absolutely. We offer school plans with admin dashboards, student progress tracking, content filtering, and FERPA/COPPA compliance. Contact us for institutional pricing.',
+  },
+  {
+    q: 'How is this different from YouTube tutorials?',
+    a: 'YouTube is passive. Future Minds is hands-on — your AI tutor asks you questions, you run code in the live sandbox, and your progress is tracked so you never lose momentum.',
+  },
+  {
+    q: 'Do I get a certificate when I finish?',
+    a: 'Yes. Every completed course generates a shareable certificate with a unique verification link. Pro users also get a portfolio page to showcase their projects.',
+  },
+  {
+    q: 'Can I cancel anytime?',
+    a: 'Yes, cancel with one click from your billing page — no forms, no calls, no questions. Your access continues until the end of your paid period.',
+  },
+];
+
+const FOOTER_LINKS = {
+  Platform: ['Features', 'Courses', 'Pricing', 'Schools'],
+  Company: ['About', 'Blog', 'Careers', 'Contact'],
+  Legal: ['Privacy', 'Terms', 'Cookies', 'Security'],
+};
+
 // ─── Animation variants ────────────────────────────────────────────────────────
 
 const fadeUp = {
@@ -138,21 +179,18 @@ function FloatingOrb({ className }: { className: string }) {
 function AIIllustration() {
   return (
     <div className="relative w-full max-w-lg mx-auto select-none">
-      {/* Outer ring */}
       <motion.div
         className="absolute inset-0 rounded-3xl border border-violet-200/60"
         animate={{ rotate: 360 }}
         transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
         style={{ borderRadius: '38% 62% 45% 55% / 55% 48% 52% 45%' }}
       />
-      {/* Main card */}
       <motion.div
         className="relative bg-white/80 backdrop-blur-xl border border-white/60 rounded-3xl p-6 shadow-card-lg"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.3 }}
       >
-        {/* Chat UI mock */}
         <div className="space-y-3 mb-4">
           <div className="flex items-start gap-2">
             <div className="w-7 h-7 rounded-full bg-gradient-ai flex items-center justify-center flex-shrink-0">
@@ -185,7 +223,6 @@ function AIIllustration() {
           </div>
         </div>
 
-        {/* Progress bar */}
         <div className="border-t border-slate-100 pt-3">
           <div className="flex items-center justify-between text-xs text-slate-500 mb-1.5">
             <span className="font-medium">Neural Networks — Lesson 3</span>
@@ -202,7 +239,6 @@ function AIIllustration() {
         </div>
       </motion.div>
 
-      {/* Floating stat badges */}
       <motion.div
         className="absolute -top-4 -right-4 bg-white rounded-xl px-3 py-2 shadow-card border border-slate-100 flex items-center gap-1.5"
         initial={{ opacity: 0, scale: 0.8 }}
@@ -249,9 +285,7 @@ function NavBar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center shadow-primary">
-            <Sparkles size={16} className="text-white" />
-          </div>
+          <img src="/logo.png" alt="Future Minds" className="h-8 w-8 object-contain" />
           <span className="font-bold text-slate-900 text-lg tracking-tight">Future Minds <span className="text-violet-600">AI</span></span>
         </div>
 
@@ -277,6 +311,27 @@ function NavBar() {
   );
 }
 
+function FAQItem({ q, a }: { q: string; a: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="border-b border-slate-100">
+      <button
+        onClick={() => setOpen(!open)}
+        className="w-full flex items-center justify-between py-5 text-left gap-4"
+      >
+        <span className="text-base font-semibold text-slate-900">{q}</span>
+        <ChevronDown
+          size={18}
+          className={`text-slate-400 flex-shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
+      </button>
+      {open && (
+        <p className="text-sm text-slate-500 leading-relaxed pb-5">{a}</p>
+      )}
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function LandingPage() {
@@ -291,18 +346,14 @@ export default function LandingPage() {
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <section ref={heroRef} className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-        {/* Animated gradient background */}
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-violet-950 to-slate-900" />
         <div className="absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(at 20% 30%, hsla(265,100%,60%,0.4) 0, transparent 50%), radial-gradient(at 80% 10%, hsla(330,100%,60%,0.3) 0, transparent 40%), radial-gradient(at 60% 80%, hsla(220,100%,60%,0.3) 0, transparent 50%)' }}
         />
-
-        {/* Dot grid overlay */}
         <div className="absolute inset-0 opacity-10"
           style={{ backgroundImage: 'radial-gradient(circle, rgba(139,92,246,0.8) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
         />
 
-        {/* Floating orbs */}
         <FloatingOrb className="w-96 h-96 bg-violet-600/30 -top-20 -left-20" />
         <FloatingOrb className="w-80 h-80 bg-pink-500/20 top-1/3 right-0" />
         <FloatingOrb className="w-64 h-64 bg-blue-500/20 bottom-10 left-1/4" />
@@ -321,7 +372,7 @@ export default function LandingPage() {
                 >
                   <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-violet-300 text-xs font-semibold px-3.5 py-1.5 rounded-full">
                     <Sparkles size={12} className="text-violet-400" />
-                    Powered by GPT-4 & Claude 3
+                    Powered by GPT-4o & Claude 3
                     <span className="bg-violet-500/40 text-violet-200 text-xs px-1.5 py-0.5 rounded-full">NEW</span>
                   </motion.div>
 
@@ -362,7 +413,17 @@ export default function LandingPage() {
                     </button>
                   </motion.div>
 
-                  <motion.div variants={fadeUp} className="flex items-center gap-4 pt-2">
+                  {/* Trust badges */}
+                  <motion.div variants={fadeUp} className="flex flex-wrap gap-2 pt-1">
+                    {TRUST_BADGES.map(({ icon: Icon, label }) => (
+                      <div key={label} className="inline-flex items-center gap-1.5 bg-white/10 border border-white/15 text-slate-300 text-xs font-medium px-3 py-1.5 rounded-full">
+                        <Icon size={11} className="text-violet-400" />
+                        {label}
+                      </div>
+                    ))}
+                  </motion.div>
+
+                  <motion.div variants={fadeUp} className="flex items-center gap-4">
                     <div className="flex -space-x-2">
                       {['SC', 'MJ', 'PP', 'AK', 'LR'].map((initials, i) => (
                         <div key={i} className={`w-8 h-8 rounded-full border-2 border-slate-900 flex items-center justify-center text-white text-xs font-bold ${
@@ -396,7 +457,6 @@ export default function LandingPage() {
           </div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 -translate-x-1/2"
           animate={{ y: [0, 8, 0] }}
@@ -431,7 +491,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── Trusted by ────────────────────────────────────────────────────── */}
-      <section className="bg-slate-900 py-12">
+      <section className="bg-slate-900 py-12 border-b border-slate-800/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-xs font-semibold text-slate-500 uppercase tracking-widest mb-8">
             Trusted by educators at world-class institutions
@@ -448,6 +508,33 @@ export default function LandingPage() {
                 <div key={i} className="flex-shrink-0 flex items-center gap-2 text-slate-500 hover:text-slate-300 transition-colors whitespace-nowrap">
                   <GraduationCap size={16} />
                   <span className="text-sm font-semibold">{school}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── AI Tools marquee ──────────────────────────────────────────────── */}
+      <section className="bg-slate-900 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-xs font-semibold text-slate-500 uppercase tracking-widest mb-8">
+            Tools you'll master
+          </p>
+          <div className="relative overflow-hidden">
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-slate-900 to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-slate-900 to-transparent z-10" />
+            <motion.div
+              className="flex gap-4 items-center"
+              animate={{ x: ['0%', '-50%'] }}
+              transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
+            >
+              {[...AI_TOOLS, ...AI_TOOLS].map((tool, i) => (
+                <div
+                  key={i}
+                  className="flex-shrink-0 bg-slate-800 border border-slate-700 text-slate-300 text-xs font-semibold px-4 py-2 rounded-full whitespace-nowrap hover:border-violet-500/50 hover:text-violet-300 transition-colors"
+                >
+                  {tool}
                 </div>
               ))}
             </motion.div>
@@ -521,7 +608,6 @@ export default function LandingPage() {
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-            {/* Connector line */}
             <div className="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-transparent via-violet-200 to-transparent" />
 
             {HOW_IT_WORKS.map((step, i) => (
@@ -602,6 +688,38 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-flex items-center gap-1.5 text-violet-600 text-xs font-semibold uppercase tracking-wider bg-violet-100 px-3 py-1.5 rounded-full mb-4">
+              <Lightbulb size={12} /> FAQ
+            </span>
+            <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+              Common <span className="text-violet-600">questions</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="bg-white rounded-2xl border border-slate-100 shadow-card px-6 divide-y divide-slate-100"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {FAQS.map((faq) => (
+              <FAQItem key={faq.q} q={faq.q} a={faq.a} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── Pricing CTA ───────────────────────────────────────────────────── */}
       <section id="pricing" className="py-24 bg-gradient-to-br from-slate-950 via-violet-950 to-slate-900 relative overflow-hidden">
         <FloatingOrb className="w-96 h-96 bg-violet-600/20 -top-20 -right-20" />
@@ -660,23 +778,59 @@ export default function LandingPage() {
       </section>
 
       {/* ── Footer ────────────────────────────────────────────────────────── */}
-      <footer className="bg-slate-950 border-t border-slate-800 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center">
-                <Sparkles size={14} className="text-white" />
+      <footer className="bg-slate-950 border-t border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-8">
+          {/* 4-column grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+            {/* Brand */}
+            <div className="col-span-2 md:col-span-1">
+              <div className="flex items-center gap-2 mb-3">
+                <img src="/logo.png" alt="Future Minds" className="h-7 w-7 object-contain" />
+                <span className="font-bold text-white text-base">Future Minds <span className="text-violet-400">AI</span></span>
               </div>
-              <span className="font-bold text-white text-base">Future Minds <span className="text-violet-400">AI</span></span>
+              <p className="text-xs text-slate-500 leading-relaxed max-w-xs">
+                The AI education platform for the next generation — students, teachers, and schools.
+              </p>
             </div>
 
-            <div className="flex items-center gap-6 text-xs text-slate-500">
-              {['Privacy', 'Terms', 'Cookies', 'Contact'].map((item) => (
-                <a key={item} href="#" className="hover:text-slate-300 transition-colors">{item}</a>
-              ))}
-            </div>
+            {/* Link columns */}
+            {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
+              <div key={heading}>
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">{heading}</p>
+                <ul className="space-y-2.5">
+                  {links.map((link) => (
+                    <li key={link}>
+                      <a href="#" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">{link}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
 
+          {/* Bottom bar */}
+          <div className="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-600">© 2025 Future Minds AI. All rights reserved.</p>
+            <div className="flex items-center gap-4">
+              {/* X (Twitter) */}
+              <a href="#" aria-label="X / Twitter" className="text-slate-600 hover:text-slate-300 transition-colors">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+              {/* LinkedIn */}
+              <a href="#" aria-label="LinkedIn" className="text-slate-600 hover:text-slate-300 transition-colors">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+              {/* YouTube */}
+              <a href="#" aria-label="YouTube" className="text-slate-600 hover:text-slate-300 transition-colors">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </footer>
