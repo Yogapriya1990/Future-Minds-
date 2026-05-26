@@ -130,7 +130,7 @@ const AGE_OPTIONS = [
   { value: '', label: 'Who is this for?' },
   { value: 'child-9-12', label: 'My child (Age 9–12)' },
   { value: 'child-13-16', label: 'My child (Age 13–16)' },
-  { value: 'adult', label: 'Myself (Adult)' },
+  { value: 'adult', label: 'Myself (Adult learner)' },
   { value: 'both', label: 'Both me and my child' },
 ];
 
@@ -379,10 +379,10 @@ function RegistrationForm() {
         >
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
             Reserve Your Spot —{' '}
-            <span className="text-violet-600">Seats Are Limited</span>
+            <span className="text-violet-600">Seats Are Limited 🎓</span>
           </h2>
           <p className="text-slate-500 text-base leading-relaxed max-w-lg mx-auto">
-            Fill in your details and we'll WhatsApp you with batch dates, course details and early access pricing.
+            Fill in your details and we'll WhatsApp you with batch dates and early access pricing within 24 hours.
           </p>
         </motion.div>
 
@@ -396,8 +396,8 @@ function RegistrationForm() {
           {submitted ? (
             <div className="text-center py-8">
               <div className="text-4xl mb-4">✅</div>
-              <p className="text-lg font-semibold text-slate-900 mb-2">Done!</p>
-              <p className="text-slate-500 text-sm">We'll WhatsApp you within 24 hours with all the details.</p>
+              <p className="text-lg font-semibold text-slate-900 mb-2">Thank you!</p>
+              <p className="text-slate-500 text-sm">We'll WhatsApp you within 24 hours with all the details and early access pricing.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -408,23 +408,23 @@ function RegistrationForm() {
                   required
                   value={name}
                   onChange={e => setName(e.target.value)}
-                  placeholder="Your name"
+                  placeholder="Your full name"
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Phone Number</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">WhatsApp Number</label>
                 <input
                   type="tel"
                   required
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
-                  placeholder="WhatsApp number"
+                  placeholder="Your WhatsApp number"
                   className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Age / Who is this for?</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Who is this for?</label>
                 <select
                   required
                   value={age}
