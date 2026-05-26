@@ -467,7 +467,7 @@ export default function LandingPage() {
 
   return (
     <div className="bg-white overflow-x-hidden">
-      <AnnouncementBar />
+      <div style={{ display: 'none' }}><AnnouncementBar /></div>
       <NavBar />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
@@ -611,6 +611,7 @@ export default function LandingPage() {
       {/* ── Registration form ─────────────────────────────────────────────── */}
       <RegistrationForm />
 
+      <div style={{ display: 'none' }}>
       {/* ── Stats bar ─────────────────────────────────────────────────────── */}
       <section className="bg-slate-900 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -977,6 +978,7 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
+      </div>
     </div>
   );
 }
