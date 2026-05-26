@@ -119,6 +119,21 @@ const PRICING_HIGHLIGHTS = [
   'Priority support',
 ];
 
+const LOCAL_TRUST_BADGES = [
+  { emoji: '🎓', label: '50+ Kids Trained' },
+  { emoji: '📅', label: 'Weekend Batches' },
+  { emoji: '⏱', label: 'Daily Doubt Clearing' },
+  { emoji: '📍', label: 'Gudiyattam, Tamil Nadu' },
+];
+
+const AGE_OPTIONS = [
+  { value: '', label: 'Who is this for?' },
+  { value: 'child-9-12', label: 'My child (Age 9–12)' },
+  { value: 'child-13-16', label: 'My child (Age 13–16)' },
+  { value: 'adult', label: 'Myself (Adult)' },
+  { value: 'both', label: 'Both me and my child' },
+];
+
 const FAQS = [
   {
     q: 'Is it really free to start?',
@@ -344,6 +359,104 @@ function FAQItem({ q, a }: { q: string; a: string }) {
   );
 }
 
+function RegistrationForm() {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [age, setAge] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    const msg = encodeURIComponent(
+      `Hi! I registered on Future Minds AI website.\nName: ${name}\nPhone: ${phone}\nFor: ${AGE_OPTIONS.find(o => o.value === age)?.label ?? age}\nPlease send me the course details.`
+    );
+    window.open(`https://wa.me/918754548081?text=${msg}`, '_blank');
+  };
+
+  return (
+    <section id="register" className="py-20 bg-white">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-10"
+        >
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+            Reserve Your Spot —{' '}
+            <span className="text-violet-600">Seats Are Limited</span>
+          </h2>
+          <p className="text-slate-500 text-base leading-relaxed max-w-lg mx-auto">
+            Fill in your details and we'll WhatsApp you with batch dates, course details and early access pricing.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="bg-white border border-slate-200 rounded-2xl shadow-card p-8"
+        >
+          {submitted ? (
+            <div className="text-center py-8">
+              <div className="text-4xl mb-4">✅</div>
+              <p className="text-lg font-semibold text-slate-900 mb-2">Done!</p>
+              <p className="text-slate-500 text-sm">We'll WhatsApp you within 24 hours with all the details.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Full Name</label>
+                <input
+                  type="text"
+                  required
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  placeholder="Your name"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Phone Number</label>
+                <input
+                  type="tel"
+                  required
+                  value={phone}
+                  onChange={e => setPhone(e.target.value)}
+                  placeholder="WhatsApp number"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Age / Who is this for?</label>
+                <select
+                  required
+                  value={age}
+                  onChange={e => setAge(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition bg-white appearance-none"
+                >
+                  {AGE_OPTIONS.map(o => (
+                    <option key={o.value} value={o.value} disabled={o.value === ''}>{o.label}</option>
+                  ))}
+                </select>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold text-base shadow-primary-lg hover:shadow-primary-xl transition-all hover:-translate-y-0.5 mt-2"
+              >
+                WhatsApp Me the Details →
+              </button>
+            </form>
+          )}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function LandingPage() {
@@ -480,6 +593,23 @@ export default function LandingPage() {
           </div>
         </motion.div>
       </section>
+
+      {/* ── Local trust bar ───────────────────────────────────────────────── */}
+      <section className="bg-violet-50 border-y border-violet-100 py-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
+            {LOCAL_TRUST_BADGES.map(({ emoji, label }) => (
+              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-violet-800">
+                <span className="text-base">{emoji}</span>
+                <span>{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Registration form ─────────────────────────────────────────────── */}
+      <RegistrationForm />
 
       {/* ── Stats bar ─────────────────────────────────────────────────────── */}
       <section className="bg-slate-900 border-b border-slate-800">
