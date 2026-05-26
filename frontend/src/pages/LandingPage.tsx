@@ -120,10 +120,10 @@ const PRICING_HIGHLIGHTS = [
 ];
 
 const LOCAL_TRUST_BADGES = [
-  { emoji: '🎓', label: '50+ Kids Trained' },
-  { emoji: '📅', label: 'Weekend Batches' },
-  { emoji: '⏱', label: 'Daily Doubt Clearing' },
-  { emoji: '📍', label: 'Gudiyattam, Tamil Nadu' },
+  { emoji: '🎓', number: '50+',      label: 'Kids Trained' },
+  { emoji: '📅', number: 'Sat & Sun', label: 'Weekend Classes' },
+  { emoji: '⏱', number: '1 Hour',   label: 'Daily Doubt Clearing' },
+  { emoji: '📍', number: 'Gudiyattam', label: 'Tamil Nadu' },
 ];
 
 const AGE_OPTIONS = [
@@ -555,13 +555,14 @@ export default function LandingPage() {
       </section>
 
       {/* ── Local trust bar ───────────────────────────────────────────────── */}
-      <section className="bg-violet-50 border-y border-violet-100 py-4">
+      <section className="bg-violet-50 border-y border-violet-100 py-6">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
-            {LOCAL_TRUST_BADGES.map(({ emoji, label }) => (
-              <div key={label} className="flex items-center gap-2 text-sm font-semibold text-violet-800">
-                <span className="text-base">{emoji}</span>
-                <span>{label}</span>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {LOCAL_TRUST_BADGES.map(({ emoji, number, label }) => (
+              <div key={label} className="flex flex-col items-center text-center gap-1">
+                <span className="text-2xl">{emoji}</span>
+                <span className="text-lg font-extrabold text-violet-700 leading-tight">{number}</span>
+                <span className="text-xs font-medium text-violet-500">{label}</span>
               </div>
             ))}
           </div>
