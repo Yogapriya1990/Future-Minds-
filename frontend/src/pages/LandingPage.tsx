@@ -126,6 +126,34 @@ const LOCAL_TRUST_BADGES = [
   { emoji: '📍', number: 'Gudiyattam', label: 'Tamil Nadu' },
 ];
 
+const GALLERY = [
+  { src: '/images/photo1.jpg', caption: 'Getting started with AI basics' },
+  { src: '/images/photo2.jpg', caption: 'Weekend class in action' },
+  { src: '/images/photo3.jpg', caption: 'Daily doubt clearing session' },
+  { src: '/images/photo4.jpg', caption: 'Our proud graduates!' },
+];
+
+const PARENT_TESTIMONIALS = [
+  {
+    quote: '[ADD YOUR PARENT QUOTE]',
+    name: '[Parent Name]',
+    location: 'Gudiyattam',
+    initials: 'P1',
+  },
+  {
+    quote: '[ADD YOUR PARENT QUOTE]',
+    name: '[Parent Name]',
+    location: 'Gudiyattam',
+    initials: 'P2',
+  },
+  {
+    quote: '[ADD YOUR PARENT QUOTE]',
+    name: '[Parent Name]',
+    location: 'Gudiyattam',
+    initials: 'P3',
+  },
+];
+
 const AGE_OPTIONS = [
   { value: '', label: 'Who is this for?' },
   { value: 'child-9-12', label: 'My child (Age 9–12)' },
@@ -566,6 +594,89 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Photo gallery ─────────────────────────────────────────────────── */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              Real Kids. Real Learning 📸
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {GALLERY.map(({ src, caption }) => (
+              <div key={caption} className="flex flex-col gap-2">
+                <div className="rounded-2xl overflow-hidden shadow-card border border-slate-100 bg-slate-100 aspect-video">
+                  <img
+                    src={src}
+                    alt={caption}
+                    className="w-full h-full object-cover"
+                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  />
+                </div>
+                <p className="text-sm text-slate-500 text-center font-medium">{caption}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Parent testimonials ───────────────────────────────────────────── */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-10"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              What Parents Are Saying ❤️
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {PARENT_TESTIMONIALS.map((t, i) => (
+              <div
+                key={i}
+                className="bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl p-6 flex flex-col gap-4 shadow-primary"
+              >
+                <span className="text-5xl font-serif text-white/30 leading-none select-none">"</span>
+                <p className="text-white text-sm leading-relaxed -mt-4">{t.quote}</p>
+                <div className="flex items-center gap-3 mt-auto pt-2 border-t border-white/20">
+                  <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                    {t.initials}
+                  </div>
+                  <div>
+                    <p className="text-white text-sm font-bold leading-tight">{t.name}</p>
+                    <p className="text-violet-200 text-xs">{t.location}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </section>
 
