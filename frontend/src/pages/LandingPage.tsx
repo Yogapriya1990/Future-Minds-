@@ -303,12 +303,16 @@ function AnnouncementBar() {
 }
 
 function NavBar() {
+  const scrollToForm = () => {
+    document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-9 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60"
+      className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -316,23 +320,12 @@ function NavBar() {
           <span className="font-bold text-slate-900 text-lg tracking-tight">Future Minds <span className="text-violet-600">AI</span></span>
         </div>
 
-        <div className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
-          {['Features', 'Courses', 'Pricing', 'Schools'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="hover:text-violet-600 transition-colors">{item}</a>
-          ))}
-        </div>
-
-        <div className="flex items-center gap-3">
-          <Link to="/login" className="hidden sm:block text-sm font-medium text-slate-600 hover:text-violet-600 transition-colors">
-            Sign in
-          </Link>
-          <Link
-            to="/register"
-            className="text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-2 rounded-xl shadow-primary hover:shadow-primary-lg transition-all hover:-translate-y-0.5"
-          >
-            Get Started Free
-          </Link>
-        </div>
+        <button
+          onClick={scrollToForm}
+          className="text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-600 px-4 py-2 rounded-xl shadow-primary hover:shadow-primary-lg transition-all hover:-translate-y-0.5"
+        >
+          Register Your Seat →
+        </button>
       </div>
     </motion.nav>
   );
@@ -471,7 +464,7 @@ export default function LandingPage() {
       <NavBar />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center pt-[6.25rem] overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center pt-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-violet-950 to-slate-900" />
         <div className="absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(at 20% 30%, hsla(265,100%,60%,0.4) 0, transparent 50%), radial-gradient(at 80% 10%, hsla(330,100%,60%,0.3) 0, transparent 40%), radial-gradient(at 60% 80%, hsla(220,100%,60%,0.3) 0, transparent 50%)' }}
