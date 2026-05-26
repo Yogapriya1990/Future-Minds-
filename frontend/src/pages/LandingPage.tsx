@@ -479,7 +479,7 @@ export default function LandingPage() {
 
         <motion.div style={{ y: heroY, opacity: heroOpacity }} className="relative z-10 w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="max-w-3xl">
 
               {/* Left: copy */}
               <div>
@@ -489,17 +489,11 @@ export default function LandingPage() {
                   animate="visible"
                   className="space-y-6"
                 >
-                  <motion.div variants={fadeUp} className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-violet-300 text-xs font-semibold px-3.5 py-1.5 rounded-full">
-                    <Sparkles size={12} className="text-violet-400" />
-                    Powered by GPT-4o & Claude 3
-                    <span className="bg-violet-500/40 text-violet-200 text-xs px-1.5 py-0.5 rounded-full">NEW</span>
-                  </motion.div>
-
                   <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight">
-                    Learn AI.{' '}
+                    Learn AI This Weekend 🚀{' '}
                     <span className="relative">
                       <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                        Teach smarter.
+                        For Kids &amp; Adults in Tamil Nadu
                       </span>
                       <motion.span
                         className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-violet-400 to-pink-400 rounded-full"
@@ -509,37 +503,19 @@ export default function LandingPage() {
                         style={{ transformOrigin: 'left' }}
                       />
                     </span>
-                    {' '}Shape tomorrow.
                   </motion.h1>
 
                   <motion.p variants={fadeUp} className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-xl">
-                    The world's most advanced AI education platform. Personalized curricula, live AI sandboxes, and real-time progress analytics — built for students and schools that want to lead, not follow.
+                    Weekend live classes (Sat &amp; Sun) + daily 1-hour doubt clearing session. Beginner-friendly. Hands-on. Taught locally in Gudiyattam by a real AI educator.
                   </motion.p>
 
                   <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-2">
-                    <Link
-                      to="/register"
+                    <button
+                      onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
                       className="group inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold px-6 py-3.5 rounded-xl shadow-primary-lg hover:shadow-primary-xl transition-all hover:-translate-y-0.5 text-base"
                     >
-                      Start Learning Free
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                    <button className="group inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/20 text-white font-semibold px-6 py-3.5 rounded-xl transition-all hover:-translate-y-0.5 text-base">
-                      <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
-                        <Play size={10} className="text-white fill-white ml-0.5" />
-                      </div>
-                      Watch Demo
+                      Register Your Seat →
                     </button>
-                  </motion.div>
-
-                  {/* Trust badges */}
-                  <motion.div variants={fadeUp} className="flex flex-wrap gap-2 pt-1">
-                    {TRUST_BADGES.map(({ icon: Icon, label }) => (
-                      <div key={label} className="inline-flex items-center gap-1.5 bg-white/10 border border-white/15 text-slate-300 text-xs font-medium px-3 py-1.5 rounded-full">
-                        <Icon size={11} className="text-violet-400" />
-                        {label}
-                      </div>
-                    ))}
                   </motion.div>
 
                   <motion.div variants={fadeUp} className="flex items-center gap-4">
@@ -563,15 +539,6 @@ export default function LandingPage() {
                   </motion.div>
                 </motion.div>
               </div>
-
-              {/* Right: illustration */}
-              <motion.div
-                initial={{ opacity: 0, x: 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                <AIIllustration />
-              </motion.div>
             </div>
           </div>
         </motion.div>
