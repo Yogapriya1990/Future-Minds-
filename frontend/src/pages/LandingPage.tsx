@@ -135,10 +135,10 @@ const GALLERY = [
 
 const PARENT_TESTIMONIALS = [
   {
-    quote: '[ADD YOUR PARENT QUOTE]',
-    name: '[Parent Name]',
+    quote: 'We are very happy to share our feedback about Thejo Pranav and Rupesh. Within just 5 days, we could clearly see a lot of positive improvements in them. They are very eager to attend the classes every day, highly curious to learn new things, and actively participate during the sessions. What makes us even happier is that they are implementing the learnings at home as well. We can see a noticeable change in their thinking, confidence, and enthusiasm towards learning. A heartfelt thanks to the mentor for creating such an engaging and inspiring learning environment for the children.',
+    name: 'Kavya',
     location: 'Gudiyattam',
-    initials: 'P1',
+    initials: 'K',
   },
   {
     quote: '[ADD YOUR PARENT QUOTE]',
