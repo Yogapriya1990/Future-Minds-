@@ -275,13 +275,25 @@ function AIIllustration() {
   );
 }
 
+function AnnouncementBar() {
+  return (
+    <div className="fixed top-0 inset-x-0 z-[60] bg-gradient-to-r from-violet-700 to-purple-700 border-b border-violet-600/50 h-9 flex items-center justify-center px-4">
+      <p className="text-xs font-medium text-violet-100 text-center">
+        <span className="font-semibold text-white">Doubt Clearing</span>
+        <span className="mx-2.5 text-violet-400">|</span>
+        <span>📍 Gudiyattam, Tamil Nadu</span>
+      </p>
+    </div>
+  );
+}
+
 function NavBar() {
   return (
     <motion.nav
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60"
+      className="fixed top-9 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -342,10 +354,11 @@ export default function LandingPage() {
 
   return (
     <div className="bg-white overflow-x-hidden">
+      <AnnouncementBar />
       <NavBar />
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex items-center pt-[6.25rem] overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-violet-950 to-slate-900" />
         <div className="absolute inset-0 opacity-40"
           style={{ backgroundImage: 'radial-gradient(at 20% 30%, hsla(265,100%,60%,0.4) 0, transparent 50%), radial-gradient(at 80% 10%, hsla(330,100%,60%,0.3) 0, transparent 40%), radial-gradient(at 60% 80%, hsla(220,100%,60%,0.3) 0, transparent 50%)' }}
