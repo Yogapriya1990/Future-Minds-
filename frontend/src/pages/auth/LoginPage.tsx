@@ -41,7 +41,7 @@ export default function LoginPage() {
 
         <div className="relative z-10">
           <div className="flex items-center gap-2.5">
-            <img src="/logo-white.svg" alt="Future Minds" className="w-9 h-9" />
+            <img src="/logo.png" alt="Future Minds" className="h-9 object-contain" />
             <span className="text-lg font-bold text-white tracking-tight">Future Minds AI</span>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function LoginPage() {
         >
           {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-8 lg:hidden">
-            <img src="/logo-violet.svg" alt="Future Minds" className="w-8 h-8" />
+            <img src="/logo.png" alt="Future Minds" className="h-8 object-contain" />
             <span className="text-base font-bold text-slate-900">Future Minds AI</span>
           </div>
 
