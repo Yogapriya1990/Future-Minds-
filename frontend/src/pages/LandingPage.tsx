@@ -117,7 +117,7 @@ const LOCAL_TRUST_BADGES = [
   { emoji: '🎓', number: '50+',      label: 'Kids Trained' },
   { emoji: '📅', number: 'Sat & Sun', label: 'Weekend Classes' },
   { emoji: '⏱', number: '1 Hour',   label: 'Daily Doubt Clearing' },
-  { emoji: '📍', number: 'Gudiyattam', label: 'Gudiyattam' },
+  { emoji: '📍', number: 'Local', label: 'Based in Gudiyattam' },
 ];
 
 const GALLERY = [
@@ -135,10 +135,10 @@ const PARENT_TESTIMONIALS = [
     initials: 'K',
   },
   {
-    quote: '[ADD YOUR PARENT QUOTE]',
-    name: '[Parent Name]',
-    location: 'Gudiyattam',
-    initials: 'P2',
+    quote: 'Weekend timing is perfect, and the 1-hour doubt session on weekdays means my son never misses anything. Highly recommend to every parent in Gudiyattam.',
+    name: 'Revathi',
+    location: 'Parent of Lathika (Age 9), Gudiyattam',
+    initials: 'RL',
   },
   {
     quote: '[ADD YOUR PARENT QUOTE]',
