@@ -117,7 +117,7 @@ const LOCAL_TRUST_BADGES = [
   { emoji: '🎓', number: '50+',      label: 'Kids Trained' },
   { emoji: '📅', number: 'Sat & Sun', label: 'Weekend Classes' },
   { emoji: '⏱', number: '1 Hour',   label: 'Daily Doubt Clearing' },
-  { emoji: '📍', number: 'Gudiyattam', label: 'Tamil Nadu' },
+  { emoji: '📍', number: 'Gudiyattam', label: 'Gudiyattam' },
 ];
 
 const GALLERY = [
@@ -318,7 +318,7 @@ function AnnouncementBar() {
       <p className="text-xs font-medium text-violet-100 text-center">
         <span className="font-semibold text-white">Doubt Clearing</span>
         <span className="mx-2.5 text-violet-400">|</span>
-        <span>📍 Gudiyattam, Tamil Nadu</span>
+        <span>📍 Gudiyattam, Gudiyattam</span>
       </p>
     </div>
   );
@@ -515,7 +515,7 @@ export default function LandingPage() {
                     Learn AI This Weekend 🚀{' '}
                     <span className="relative">
                       <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                        For Kids &amp; Adults in Tamil Nadu
+                        For Kids &amp; Adults in Gudiyattam
                       </span>
                       <motion.span
                         className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-violet-400 to-pink-400 rounded-full"
