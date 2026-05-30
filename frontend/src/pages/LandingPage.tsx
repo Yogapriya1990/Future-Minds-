@@ -127,10 +127,10 @@ const LOCAL_TRUST_BADGES = [
 ];
 
 const GALLERY = [
-  { src: '/images/photo1.jpg', caption: 'Getting started with AI basics' },
-  { src: '/images/photo2.jpg', caption: 'Weekend class in action' },
-  { src: '/images/photo3.jpg', caption: 'Daily doubt clearing session' },
-  { src: '/images/photo4.jpg', caption: 'Our proud graduates!' },
+  { src: '/images/photo1.jpg',   caption: 'Getting started with AI basics' },
+  { src: '/images/photo2.jpg',   caption: 'Weekend class in action' },
+  { src: '/images/photo3.webp',  caption: 'Daily doubt clearing session' },
+  { src: '/images/photo4.jpg',   caption: 'Our proud graduates!' },
 ];
 
 const PARENT_TESTIMONIALS = [
