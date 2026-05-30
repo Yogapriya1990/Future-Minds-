@@ -117,7 +117,7 @@ const LOCAL_TRUST_BADGES = [
   { emoji: '🎓', number: '50+',      label: 'Kids Trained' },
   { emoji: '📅', number: 'Sat & Sun', label: 'Weekend Classes' },
   { emoji: '⏱', number: '1 Hour',   label: 'Daily Doubt Clearing' },
-  { emoji: '📍', number: 'Local', label: 'Based in Gudiyattam' },
+  { emoji: '📍', number: 'In-Person', label: 'Gudiyattam' },
 ];
 
 const GALLERY = [
