@@ -125,6 +125,7 @@ const GALLERY = [
   { src: '/images/photo2.jpg',   caption: 'Weekend class in action' },
   { src: '/images/photo3.webp',  caption: 'Daily doubt clearing session' },
   { src: '/images/photo4.jpg',   caption: 'Our proud graduates!' },
+  { src: '/images/priya.jpg',    caption: 'Yogapriya Sambathkumar — Your AI Instructor' },
 ];
 
 const PARENT_TESTIMONIALS = [
