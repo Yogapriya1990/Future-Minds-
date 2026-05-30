@@ -23,6 +23,7 @@ const Loading = () => (
 // Landing page
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 
+
 // Auth pages
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/auth/RegisterPage'));
