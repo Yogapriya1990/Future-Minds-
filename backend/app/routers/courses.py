@@ -11,7 +11,7 @@ from app.models.lesson import Lesson
 from app.models.lesson_progress import LessonProgress
 from app.models.user import User, UserRole
 from app.schemas.course import (
-    CourseCreate, CourseResponse, CourseUpdate,
+    CourseCreate, CourseDetailResponse, CourseResponse, CourseUpdate,
     EnrollmentResponse, LessonCreate, LessonResponse, ProgressResponse,
 )
 
@@ -32,6 +32,19 @@ async def list_courses(
     return query.order_by(Course.created_at.desc()).all()
 
 
+@router.get("/my", response_model=list[CourseResponse])
+async def my_courses(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    return (
+        db.query(Course)
+        .filter(Course.instructor_id == current_user.id, Course.is_deleted == False)
+        .order_by(Course.created_at.desc())
+        .all()
+    )
+
+
 @router.post("", response_model=CourseResponse, status_code=201)
 async def create_course(
     body: CourseCreate,
@@ -47,7 +60,7 @@ async def create_course(
     return course
 
 
-@router.get("/{course_id}", response_model=CourseResponse)
+@router.get("/{course_id}", response_model=CourseDetailResponse)
 async def get_course(course_id: int, db: Session = Depends(get_db)):
     course = db.query(Course).options(selectinload(Course.lessons)).filter(Course.id == course_id).first()
     if not course:

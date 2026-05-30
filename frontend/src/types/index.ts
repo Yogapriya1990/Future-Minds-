@@ -163,11 +163,11 @@ export interface PlatformStats {
 }
 
 export interface UserStats {
-  total_tokens_used: number;
-  total_conversations: number;
-  total_courses_enrolled: number;
-  total_tool_runs: number;
-  total_workflows: number;
+  tokens_used_total: number;
+  courses_enrolled: number;
+  courses_completed: number;
+  tools_run: number;
+  workflow_runs: number;
 }
 
 export interface PaginatedResponse<T> {

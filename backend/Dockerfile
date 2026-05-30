@@ -14,10 +14,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./app ./app
 COPY alembic.ini .
 COPY ./alembic ./alembic
+COPY entrypoint.sh .
+RUN sed -i 's/\r//' entrypoint.sh && chmod +x entrypoint.sh
 
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
 EXPOSE 8000
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
+CMD ["bash", "entrypoint.sh"]

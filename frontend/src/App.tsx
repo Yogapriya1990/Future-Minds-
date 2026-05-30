@@ -4,7 +4,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/auth/ProtectedRoute';
 import { AdminRoute } from './components/auth/AdminRoute';
-import { PageWrapper } from './components/layout/PageWrapper';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -13,19 +12,16 @@ const queryClient = new QueryClient({
 });
 
 const Loading = () => (
-  <div className="flex items-center justify-center h-screen">
-    <div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" />
+  <div className="flex flex-col items-center justify-center h-screen bg-surface-50 gap-4">
+    <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-primary animate-pulse">
+      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+    </div>
+    <p className="text-sm text-slate-400 font-medium animate-pulse">Loading...</p>
   </div>
 );
 
-const Placeholder = ({ title }: { title: string }) => (
-  <PageWrapper>
-    <div className="p-8">
-      <h1 className="text-2xl font-bold text-gray-800">{title}</h1>
-      <p className="text-gray-500 mt-2">This page is being built.</p>
-    </div>
-  </PageWrapper>
-);
+// Landing page
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 
 // Auth pages
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'));
@@ -52,6 +48,7 @@ const EditCoursePage = lazy(() => import('./pages/teach/EditCoursePage'));
 const ToolMarketplacePage = lazy(() => import('./pages/tools/ToolMarketplacePage'));
 const ToolRunnerPage = lazy(() => import('./pages/tools/ToolRunnerPage'));
 const ToolHistoryPage = lazy(() => import('./pages/tools/ToolHistoryPage'));
+const WorksheetGeneratorPage = lazy(() => import('./pages/tools/WorksheetGeneratorPage'));
 
 // Automations
 const WorkflowListPage = lazy(() => import('./pages/automations/WorkflowListPage'));
@@ -73,14 +70,6 @@ const CourseModPage = lazy(() => import('./pages/admin/CourseModPage'));
 const ToolManagementPage = lazy(() => import('./pages/admin/ToolManagementPage'));
 const PlatformAnalyticsPage = lazy(() => import('./pages/admin/PlatformAnalyticsPage'));
 
-function SafePage({ component: Component, title }: { component: React.LazyExoticComponent<() => JSX.Element>; title: string }) {
-  return (
-    <Suspense fallback={<Loading />}>
-      <Component />
-    </Suspense>
-  );
-}
-
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
@@ -100,10 +89,11 @@ export default function App() {
             <Route path="/learn/:id" element={<ProtectedRoute><Suspense fallback={<Loading />}><CourseDetailPage /></Suspense></ProtectedRoute>} />
             <Route path="/learn/:courseId/lesson/:lessonId" element={<ProtectedRoute><Suspense fallback={<Loading />}><LessonViewerPage /></Suspense></ProtectedRoute>} />
             <Route path="/teach" element={<ProtectedRoute><Suspense fallback={<Loading />}><InstructorDashboardPage /></Suspense></ProtectedRoute>} />
-            <Route path="/teach/courses/new" element={<ProtectedRoute><Suspense fallback={<Loading />}><CreateCoursePage /></Suspense></ProtectedRoute>} />
-            <Route path="/teach/courses/:id/edit" element={<ProtectedRoute><Suspense fallback={<Loading />}><EditCoursePage /></Suspense></ProtectedRoute>} />
+            <Route path="/teach/create" element={<ProtectedRoute><Suspense fallback={<Loading />}><CreateCoursePage /></Suspense></ProtectedRoute>} />
+            <Route path="/teach/edit/:id" element={<ProtectedRoute><Suspense fallback={<Loading />}><EditCoursePage /></Suspense></ProtectedRoute>} />
             <Route path="/tools" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolMarketplacePage /></Suspense></ProtectedRoute>} />
             <Route path="/tools/history" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolHistoryPage /></Suspense></ProtectedRoute>} />
+            <Route path="/tools/worksheet" element={<ProtectedRoute><Suspense fallback={<Loading />}><WorksheetGeneratorPage /></Suspense></ProtectedRoute>} />
             <Route path="/tools/:slug" element={<ProtectedRoute><Suspense fallback={<Loading />}><ToolRunnerPage /></Suspense></ProtectedRoute>} />
             <Route path="/automations" element={<ProtectedRoute><Suspense fallback={<Loading />}><WorkflowListPage /></Suspense></ProtectedRoute>} />
             <Route path="/automations/new" element={<ProtectedRoute><Suspense fallback={<Loading />}><WorkflowBuilderPage /></Suspense></ProtectedRoute>} />
@@ -120,7 +110,7 @@ export default function App() {
             <Route path="/admin/tools" element={<AdminRoute><Suspense fallback={<Loading />}><ToolManagementPage /></Suspense></AdminRoute>} />
             <Route path="/admin/analytics" element={<AdminRoute><Suspense fallback={<Loading />}><PlatformAnalyticsPage /></Suspense></AdminRoute>} />
 
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="/" element={<Suspense fallback={<Loading />}><LandingPage /></Suspense>} />
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
           </Routes>
         </BrowserRouter>

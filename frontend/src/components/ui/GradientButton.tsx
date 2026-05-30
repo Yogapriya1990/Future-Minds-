@@ -1,51 +1,71 @@
-import { motion } from 'framer-motion';
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
+import { ReactNode } from 'react';
 import { cn } from '../../lib/utils';
+import { Loader2 } from 'lucide-react';
 
-interface GradientButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface GradientButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
   children: ReactNode;
-  variant?: 'primary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'outline' | 'ghost' | 'danger';
+  size?: 'xs' | 'sm' | 'md' | 'lg';
   isLoading?: boolean;
+  leftIcon?: ReactNode;
+  rightIcon?: ReactNode;
 }
+
+const sizeClasses = {
+  xs: 'px-3 py-1.5 text-xs gap-1.5',
+  sm: 'px-4 py-2 text-sm gap-2',
+  md: 'px-5 py-2.5 text-sm gap-2',
+  lg: 'px-6 py-3 text-base gap-2.5',
+};
+
+const variantClasses = {
+  primary:
+    'text-white bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 shadow-primary hover:shadow-primary-lg border border-violet-500/20',
+  outline:
+    'text-violet-600 dark:text-violet-400 bg-white dark:bg-transparent border-2 border-violet-200 dark:border-violet-700 hover:border-violet-400 dark:hover:border-violet-500 hover:bg-violet-50 dark:hover:bg-violet-950/30',
+  ghost:
+    'text-slate-600 dark:text-slate-300 bg-transparent hover:bg-slate-100 dark:hover:bg-white/8 hover:text-slate-900 dark:hover:text-slate-100',
+  danger:
+    'text-white bg-gradient-to-r from-red-500 to-rose-500 hover:from-red-400 hover:to-rose-400 shadow-lg shadow-red-200/50 dark:shadow-red-900/30',
+};
 
 export function GradientButton({
   children,
   variant = 'primary',
   size = 'md',
   isLoading,
+  leftIcon,
+  rightIcon,
   className,
   disabled,
   ...props
 }: GradientButtonProps) {
-  const sizeClasses = {
-    sm: 'px-4 py-2 text-sm',
-    md: 'px-6 py-3 text-base',
-    lg: 'px-8 py-4 text-lg',
-  };
-
   return (
     <motion.button
-      whileHover={{ scale: 1.02, y: -2 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={{ scale: disabled || isLoading ? 1 : 1.01, y: disabled || isLoading ? 0 : -1 }}
+      whileTap={{ scale: disabled || isLoading ? 1 : 0.98 }}
       disabled={disabled || isLoading}
       className={cn(
-        'rounded-full font-semibold transition-shadow',
+        'inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-200',
         sizeClasses[size],
-        variant === 'primary' && 'text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:shadow-lg hover:shadow-purple-200',
-        variant === 'outline' && 'text-purple-600 border-2 border-purple-500 hover:bg-purple-50',
-        (disabled || isLoading) && 'opacity-60 cursor-not-allowed',
+        variantClasses[variant],
+        (disabled || isLoading) && 'opacity-60 cursor-not-allowed pointer-events-none',
         className
       )}
       {...props}
     >
       {isLoading ? (
-        <span className="flex items-center gap-2">
-          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          Loading...
-        </span>
+        <>
+          <Loader2 size={15} className="animate-spin" />
+          <span>Loading...</span>
+        </>
       ) : (
-        children
+        <>
+          {leftIcon && <span className="flex-shrink-0">{leftIcon}</span>}
+          {children}
+          {rightIcon && <span className="flex-shrink-0">{rightIcon}</span>}
+        </>
       )}
     </motion.button>
   );

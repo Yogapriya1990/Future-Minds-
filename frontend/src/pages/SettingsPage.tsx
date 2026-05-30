@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Navbar } from '../components/layout/Navbar';
 import { PageWrapper } from '../components/layout/PageWrapper';
 import { GlassCard } from '../components/ui/GlassCard';
 import { GradientButton } from '../components/ui/GradientButton';
@@ -13,7 +12,6 @@ export default function SettingsPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-2xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Settings</h1>
         <GlassCard>

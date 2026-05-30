@@ -1,11 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Navbar } from '../../components/layout/Navbar';
+import { BookOpen, Star, Trash2 } from 'lucide-react';
 import { PageWrapper } from '../../components/layout/PageWrapper';
-import { GlassCard } from '../../components/ui/GlassCard';
-import { GradientButton } from '../../components/ui/GradientButton';
-import { AnimatedList } from '../../components/ui/AnimatedList';
+import { GlassCard, GradientButton, AnimatedList, PageHeader, StatusBadge, Spinner, EmptyState } from '../../components/ui';
 import api from '../../services/api';
 import { Course } from '../../types';
+
+const DIFF_VARIANT: Record<string, 'beginner' | 'intermediate' | 'advanced'> = {
+  beginner: 'beginner', intermediate: 'intermediate', advanced: 'advanced',
+};
 
 export default function CourseModPage() {
   const qc = useQueryClient();
@@ -16,56 +18,89 @@ export default function CourseModPage() {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (courseId: number) => api.delete(`/api/admin/courses/${courseId}`).then((r) => r.data),
+    mutationFn: (id: number) => api.delete(`/api/admin/courses/${id}`).then((r) => r.data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['admin-courses'] }),
   });
 
   const featureMutation = useMutation({
-    mutationFn: (courseId: number) => api.post(`/api/admin/courses/${courseId}/feature`).then((r) => r.data),
+    mutationFn: (id: number) => api.post(`/api/admin/courses/${id}/feature`).then((r) => r.data),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['admin-courses'] }),
   });
 
   return (
     <PageWrapper>
-      <Navbar />
-      <div className="max-w-5xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Course Moderation</h1>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+        <PageHeader
+          title="Course Moderation"
+          subtitle="Review, feature, and manage all courses"
+          badge={`${courses.length} courses`}
+        />
 
         {isLoading ? (
-          <div className="flex justify-center py-20"><div className="w-8 h-8 border-4 border-purple-500 border-t-transparent rounded-full animate-spin" /></div>
+          <Spinner label="Loading courses..." />
         ) : courses.length === 0 ? (
-          <GlassCard className="text-center py-16 text-gray-400">No courses on platform yet</GlassCard>
+          <EmptyState
+            icon={<BookOpen size={28} />}
+            title="No courses yet"
+            description="No courses have been created on the platform yet."
+          />
         ) : (
           <AnimatedList className="space-y-3">
             {courses.map((course) => (
-              <GlassCard key={course.id}>
+              <GlassCard
+                key={course.id}
+                accent={course.is_published ? 'violet' : 'amber'}
+                hover
+                className="group"
+              >
                 <div className="flex items-start gap-4">
-                  {course.thumbnail_url && (
-                    <img src={course.thumbnail_url} alt={course.title} className="w-16 h-12 rounded-lg object-cover shrink-0" />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="font-semibold text-gray-900 truncate">{course.title}</h3>
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium shrink-0 ${course.is_published ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}`}>
-                        {course.is_published ? 'Published' : 'Draft'}
-                      </span>
+                  {/* Thumbnail */}
+                  {course.thumbnail_url ? (
+                    <img
+                      src={course.thumbnail_url}
+                      alt={course.title}
+                      className="w-16 h-14 rounded-xl object-cover flex-shrink-0 shadow-sm"
+                    />
+                  ) : (
+                    <div className="w-16 h-14 rounded-xl bg-gradient-to-br from-violet-100 to-purple-100 flex items-center justify-center flex-shrink-0">
+                      <BookOpen size={20} className="text-violet-400" />
                     </div>
-                    <p className="text-sm text-gray-500 truncate">{course.description}</p>
-                    <div className="flex items-center gap-3 mt-1 text-xs text-gray-400">
+                  )}
+
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
+                      <h3 className="text-sm font-bold text-slate-900 truncate">{course.title}</h3>
+                      <StatusBadge variant={course.is_published ? 'published' : 'draft'} dot />
+                      <StatusBadge variant={DIFF_VARIANT[course.difficulty] ?? 'beginner'} />
+                    </div>
+                    <p className="text-xs text-slate-500 truncate mb-2">{course.description}</p>
+                    <div className="flex items-center gap-4 text-xs text-slate-400">
                       <span>{course.enrollment_count ?? 0} enrolled</span>
-                      <span className="capitalize">{course.difficulty}</span>
-                      <span>{course.category}</span>
+                      <span className="capitalize">{course.category}</span>
+                      <span>{course.total_lessons} lessons</span>
                     </div>
                   </div>
-                  <div className="flex gap-2 shrink-0">
-                    <GradientButton size="sm" variant="outline" onClick={() => featureMutation.mutate(course.id)}>
+
+                  {/* Actions */}
+                  <div className="flex items-center gap-2 flex-shrink-0 opacity-80 group-hover:opacity-100 transition-opacity">
+                    <GradientButton
+                      size="sm"
+                      variant="outline"
+                      leftIcon={<Star size={13} />}
+                      onClick={() => featureMutation.mutate(course.id)}
+                    >
                       Feature
                     </GradientButton>
                     <GradientButton
                       size="sm"
-                      variant="outline"
-                      onClick={() => { if (confirm(`Delete "${course.title}"?`)) deleteMutation.mutate(course.id); }}
-                      className="border-red-200 text-red-600 hover:bg-red-50"
+                      variant="danger"
+                      leftIcon={<Trash2 size={13} />}
+                      onClick={() => {
+                        if (confirm(`Delete "${course.title}"? This cannot be undone.`)) {
+                          deleteMutation.mutate(course.id);
+                        }
+                      }}
                     >
                       Delete
                     </GradientButton>

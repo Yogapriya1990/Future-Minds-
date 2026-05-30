@@ -1,7 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Navbar } from '../../components/layout/Navbar';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GradientButton } from '../../components/ui/GradientButton';
 import api from '../../services/api';
@@ -37,7 +36,6 @@ export default function LessonViewerPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-3xl mx-auto px-4 py-8">
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">

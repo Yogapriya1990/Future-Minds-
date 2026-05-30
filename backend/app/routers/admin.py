@@ -58,7 +58,22 @@ async def ban_user(
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
-    user.is_active = not user.is_active
+    user.is_active = False
+    db.commit()
+    db.refresh(user)
+    return user
+
+
+@router.post("/users/{user_id}/unban", response_model=UserResponse)
+async def unban_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    _: User = Depends(_require_admin),
+):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    user.is_active = True
     db.commit()
     db.refresh(user)
     return user
@@ -70,6 +85,18 @@ async def admin_list_courses(
     _: User = Depends(_require_admin),
 ):
     return db.query(Course).filter(Course.is_deleted == False).order_by(Course.created_at.desc()).all()
+
+
+@router.post("/courses/{course_id}/feature", response_model=CourseResponse)
+async def feature_course(
+    course_id: int,
+    db: Session = Depends(get_db),
+    _: User = Depends(_require_admin),
+):
+    course = db.query(Course).filter(Course.id == course_id).first()
+    if not course:
+        raise HTTPException(status_code=404, detail="Course not found")
+    return course
 
 
 @router.delete("/courses/{course_id}", status_code=204)

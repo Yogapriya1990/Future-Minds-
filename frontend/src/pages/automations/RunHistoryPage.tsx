@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Navbar } from '../../components/layout/Navbar';
 import { PageWrapper } from '../../components/layout/PageWrapper';
 import { GlassCard } from '../../components/ui/GlassCard';
 import { AnimatedList } from '../../components/ui/AnimatedList';
@@ -23,7 +22,6 @@ export default function RunHistoryPage() {
 
   return (
     <PageWrapper>
-      <Navbar />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Run History</h1>
         {isLoading ? (
