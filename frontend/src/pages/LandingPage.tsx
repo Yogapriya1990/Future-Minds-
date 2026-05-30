@@ -135,16 +135,16 @@ const PARENT_TESTIMONIALS = [
     initials: 'K',
   },
   {
-    quote: 'Weekend timing is perfect, and the 1-hour doubt session on weekdays means my son never misses anything. Highly recommend to every parent in Gudiyattam.',
+    quote: 'Honestly I wasn\'t sure if a child in Class 6 could understand AI. But the way Priya explains things — no jargon, no pressure, very hands-on — my daughter grasped it faster than I expected. She even taught her grandfather what ChatGPT is! Worth every rupee.',
+    name: 'Nirmala',
+    location: 'Parent of Moulesswaran (Age 12), Gudiyattam',
+    initials: 'MW',
+  },
+  {
+    quote: 'As a working parent I wanted something local, trustworthy and actually useful for my child\'s future. Future Minds AI Academy is exactly that. Weekend timing is perfect, and the 1-hour doubt session on weekdays means my son never misses anything. Highly recommend to every parent in Gudiyattam.',
     name: 'Revathi',
     location: 'Parent of Lathika (Age 9), Gudiyattam',
     initials: 'RL',
-  },
-  {
-    quote: '[ADD YOUR PARENT QUOTE]',
-    name: '[Parent Name]',
-    location: 'Gudiyattam',
-    initials: 'P3',
   },
 ];
 
