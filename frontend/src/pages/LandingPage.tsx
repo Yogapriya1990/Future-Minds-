@@ -28,12 +28,6 @@ const AI_TOOLS = [
   'Midjourney', 'AutoGen',
 ];
 
-const TRUST_BADGES = [
-  { icon: Sparkles, label: 'GPT-4o Powered' },
-  { icon: BookOpen, label: '1,200+ Lessons' },
-  { icon: CheckCircle2, label: 'No Credit Card' },
-  { icon: Zap, label: 'Cancel Anytime' },
-];
 
 const FEATURES = [
   {
