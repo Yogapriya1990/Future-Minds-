@@ -708,52 +708,137 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Pricing card ──────────────────────────────────────────────────── */}
+      {/* ── Pricing cards ─────────────────────────────────────────────────── */}
       <section className="py-16 bg-slate-50">
-        <div className="max-w-sm mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl p-7 shadow-primary text-white"
+            className="text-center mb-10"
           >
-            {/* Tag */}
-            <span className="inline-block bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-4">
-              Save ₹1,499
-            </span>
-
-            {/* Subtitle */}
-            <p className="text-violet-200 text-sm font-medium mb-1">You + your child</p>
-
-            {/* Pricing */}
-            <div className="flex items-baseline gap-3 mb-5">
-              <span className="text-4xl font-extrabold text-amber-400">₹7,499</span>
-              <span className="text-violet-300 line-through text-base">₹8,998</span>
-            </div>
-
-            {/* Features */}
-            <ul className="space-y-2 mb-7">
-              {[
-                'Both tracks included',
-                'Learn AI together',
-                'All sessions + doubt clearing',
-                '2 certificates',
-              ].map(f => (
-                <li key={f} className="flex items-center gap-2 text-sm text-violet-100">
-                  <span className="text-green-400 font-bold">✓</span> {f}
-                </li>
-              ))}
-            </ul>
-
-            {/* CTA */}
-            <button
-              onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
-              className="w-full py-3 px-6 rounded-xl bg-white text-violet-700 font-semibold text-base hover:bg-violet-50 transition-all"
-            >
-              Register Family →
-            </button>
+            <p className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-2">Pricing</p>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Simple, transparent fees</h2>
           </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+
+            {/* Card 1 — Kids Track */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0 }}
+              className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col shadow-sm"
+            >
+              <span className="inline-block self-start bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+                Early Bird — First 10 seats
+              </span>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-0.5">Kids Track 👦</h3>
+              <p className="text-sm text-slate-500 mb-4">Age 9–16</p>
+              <div className="flex items-baseline gap-2 mb-5">
+                <span className="text-3xl font-extrabold text-violet-600">₹2,999</span>
+                <span className="text-slate-400 line-through text-sm">₹3,499</span>
+              </div>
+              <ul className="space-y-2 mb-7 flex-1">
+                {[
+                  '12 weekend live sessions',
+                  'Daily 1hr doubt clearing',
+                  'Certificate on completion',
+                  'Hybrid — online + in-person',
+                ].map(f => (
+                  <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
+                    <span className="text-violet-500 font-bold">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full py-3 px-6 rounded-xl border-2 border-violet-600 text-violet-600 font-semibold text-sm hover:bg-violet-50 transition-all"
+              >
+                Register Child →
+              </button>
+            </motion.div>
+
+            {/* Card 2 — Adult Track (Most Popular) */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl p-6 flex flex-col shadow-primary relative"
+            >
+              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-900 text-xs font-extrabold px-4 py-1 rounded-full tracking-wide">
+                MOST POPULAR
+              </span>
+              <span className="inline-block self-start bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 mt-2">
+                Early Bird — First 10 seats
+              </span>
+              <h3 className="text-xl font-extrabold text-white mb-0.5">Adult Track 👩‍💻</h3>
+              <p className="text-sm text-violet-200 mb-4">Working professionals</p>
+              <div className="flex items-baseline gap-2 mb-5">
+                <span className="text-3xl font-extrabold text-amber-400">₹4,499</span>
+                <span className="text-violet-300 line-through text-sm">₹5,499</span>
+              </div>
+              <ul className="space-y-2 mb-7 flex-1">
+                {[
+                  '12 weekend live sessions',
+                  'Daily 1hr doubt clearing',
+                  'AI tools + automation focus',
+                  'Hybrid — online + in-person',
+                ].map(f => (
+                  <li key={f} className="flex items-center gap-2 text-sm text-violet-100">
+                    <span className="text-green-400 font-bold">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full py-3 px-6 rounded-xl bg-white text-violet-700 font-semibold text-sm hover:bg-violet-50 transition-all"
+              >
+                Register Myself →
+              </button>
+            </motion.div>
+
+            {/* Card 3 — Family Plan */}
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col shadow-sm"
+            >
+              <span className="inline-block self-start bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+                Save ₹1,499
+              </span>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-0.5">Family Pack 🔥</h3>
+              <p className="text-sm text-slate-500 mb-4">You + your child</p>
+              <div className="flex items-baseline gap-2 mb-5">
+                <span className="text-3xl font-extrabold text-amber-500">₹7,499</span>
+                <span className="text-slate-400 line-through text-sm">₹8,998</span>
+              </div>
+              <ul className="space-y-2 mb-7 flex-1">
+                {[
+                  'Both tracks included',
+                  'Learn AI together',
+                  'All sessions + doubt clearing',
+                  '2 certificates',
+                ].map(f => (
+                  <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
+                    <span className="text-violet-500 font-bold">✓</span> {f}
+                  </li>
+                ))}
+              </ul>
+              <button
+                onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
+                className="w-full py-3 px-6 rounded-xl border-2 border-violet-600 text-violet-600 font-semibold text-sm hover:bg-violet-50 transition-all"
+              >
+                Register Family →
+              </button>
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
