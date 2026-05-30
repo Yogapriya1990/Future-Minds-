@@ -556,7 +556,7 @@ export default function LandingPage() {
                           <Star key={i} size={12} className="text-amber-400 fill-amber-400" />
                         ))}
                       </div>
-                      <p className="text-xs text-slate-400"><span className="text-white font-semibold">50,000+</span> students already learning</p>
+                      <p className="text-xs text-slate-400"><span className="text-white font-semibold">50+</span> students already learning</p>
                     </div>
                   </motion.div>
                 </motion.div>
