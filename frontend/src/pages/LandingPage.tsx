@@ -135,7 +135,7 @@ const PARENT_TESTIMONIALS = [
     initials: 'K',
   },
   {
-    quote: 'Honestly I wasn\'t sure if a child in Class 6 could understand AI. But the way Priya explains things — no jargon, no pressure, very hands-on — my daughter grasped it faster than I expected. She even taught her grandfather what ChatGPT is! Worth every rupee.',
+    quote: 'Honestly I wasn\'t sure if a child in Class 6 could understand AI. But the way Yogapriya explains things — no jargon, no pressure, very hands-on — my daughter grasped it faster than I expected. She even taught her grandfather what ChatGPT is! Worth every rupee.',
     name: 'Nirmala',
     location: 'Parent of Moulesswaran (Age 12), Gudiyattam',
     initials: 'MW',
@@ -400,11 +400,10 @@ function RegistrationForm() {
           className="text-center mb-10"
         >
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
-            Reserve Your Spot —{' '}
-            <span className="text-violet-600">Seats Are Limited 🎓</span>
+            Reserve Your Spot
           </h2>
           <p className="text-slate-500 text-base leading-relaxed max-w-lg mx-auto">
-            Fill in your details and we'll WhatsApp you with batch dates and early access pricing within 24 hours.
+            Fill in your details and we'll WhatsApp you with batch dates and course fee details within 24 hours.
           </p>
         </motion.div>
 
@@ -419,7 +418,7 @@ function RegistrationForm() {
             <div className="text-center py-8">
               <div className="text-4xl mb-4">✅</div>
               <p className="text-lg font-semibold text-slate-900 mb-2">Thank you!</p>
-              <p className="text-slate-500 text-sm">We'll WhatsApp you within 24 hours with all the details and early access pricing.</p>
+              <p className="text-slate-500 text-sm">Early bird pricing available — ask us on WhatsApp.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -527,8 +526,14 @@ export default function LandingPage() {
                     </span>
                   </motion.h1>
 
+                  <motion.p variants={fadeUp} className="text-sm text-slate-400 font-normal -mt-2">
+                    Taught by Yogapriya · ₹1,500/month · Next batch starts 1 July
+                  </motion.p>
+
                   <motion.p variants={fadeUp} className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-xl">
-                    Weekend live classes (Sat &amp; Sun) + daily 1-hour doubt clearing session. Beginner-friendly. Hands-on. Taught locally in Gudiyattam by a real AI educator.
+                    Weekend live classes every Saturday &amp; Sunday + 1-hour daily doubt clearing on weekdays.
+                    Taught in-person in Gudiyattam Rajaganapathy Nagar, Gudiyattam.
+                    Beginner-friendly. No coding needed. For kids aged 9–16 and working adults.
                   </motion.p>
 
                   <motion.div variants={fadeUp} className="flex flex-wrap gap-3 pt-2">
@@ -540,24 +545,8 @@ export default function LandingPage() {
                     </button>
                   </motion.div>
 
-                  <motion.div variants={fadeUp} className="flex items-center gap-4">
-                    <div className="flex -space-x-2">
-                      {['SC', 'MJ', 'PP', 'AK', 'LR'].map((initials, i) => (
-                        <div key={i} className={`w-8 h-8 rounded-full border-2 border-slate-900 flex items-center justify-center text-white text-xs font-bold ${
-                          ['bg-violet-500','bg-pink-500','bg-blue-500','bg-emerald-500','bg-amber-500'][i]
-                        }`}>
-                          {initials}
-                        </div>
-                      ))}
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-1 mb-0.5">
-                        {Array(5).fill(0).map((_, i) => (
-                          <Star key={i} size={12} className="text-amber-400 fill-amber-400" />
-                        ))}
-                      </div>
-                      <p className="text-xs text-slate-400"><span className="text-white font-semibold">50+</span> students already learning</p>
-                    </div>
+                  <motion.div variants={fadeUp}>
+                    <p className="text-sm text-slate-400 font-normal">50+ students already learning</p>
                   </motion.div>
                 </motion.div>
               </div>
@@ -671,6 +660,122 @@ export default function LandingPage() {
               </div>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      {/* ── About instructor ──────────────────────────────────────────────── */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <p className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-8 text-center">Who is teaching you?</p>
+            <div className="flex flex-col md:flex-row items-center gap-10">
+              {/* Circular photo */}
+              <div className="flex-shrink-0">
+                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-violet-100 shadow-lg bg-violet-50">
+                  <img
+                    src="/images/priya.jpg"
+                    alt="Yogapriya Sambathkumar"
+                    className="w-full h-full object-cover"
+                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                  />
+                </div>
+              </div>
+              {/* Text */}
+              <div className="flex-1 text-center md:text-left">
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4">
+                  Hi, I'm Yogapriya Sambathkumar 👋
+                </h2>
+                <p className="text-slate-600 text-base leading-relaxed mb-6">
+                  I'm a Program Manager at a global tech company with 13+ years in software delivery. I work daily with AI tools, automation, and systems design — and I built Future Minds AI Academy because every child and adult in Gudiyattam deserves access to these skills, not just people in big cities.
+                  <br /><br />
+                  I teach practically, in plain language, with zero jargon.
+                </p>
+                <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                  {['PMP Certified', '13+ Years in Tech', 'AI & Automation Expert'].map(badge => (
+                    <span key={badge} className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-violet-50 text-violet-700 border border-violet-200">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Pricing card ──────────────────────────────────────────────────── */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-sm mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl p-7 shadow-primary text-white"
+          >
+            {/* Tag */}
+            <span className="inline-block bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-4">
+              Save ₹1,499
+            </span>
+
+            {/* Subtitle */}
+            <p className="text-violet-200 text-sm font-medium mb-1">You + your child</p>
+
+            {/* Pricing */}
+            <div className="flex items-baseline gap-3 mb-5">
+              <span className="text-4xl font-extrabold text-amber-400">₹7,499</span>
+              <span className="text-violet-300 line-through text-base">₹8,998</span>
+            </div>
+
+            {/* Features */}
+            <ul className="space-y-2 mb-7">
+              {[
+                'Both tracks included',
+                'Learn AI together',
+                'All sessions + doubt clearing',
+                '2 certificates',
+              ].map(f => (
+                <li key={f} className="flex items-center gap-2 text-sm text-violet-100">
+                  <span className="text-green-400 font-bold">✓</span> {f}
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA */}
+            <button
+              onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full py-3 px-6 rounded-xl bg-white text-violet-700 font-semibold text-base hover:bg-violet-50 transition-all"
+            >
+              Register Family →
+            </button>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── Class schedule strip ──────────────────────────────────────────── */}
+      <section className="bg-violet-50 border-y border-violet-100 py-8">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-5 text-center">Class Schedule</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {[
+              { icon: '📅', label: 'Saturday & Sunday', sub: 'Live classes' },
+              { icon: '⏱', label: 'Mon – Fri', sub: '1hr doubt clearing session' },
+              { icon: '📍', label: 'Rajaganapathy Nagar, Gudiyattam', sub: 'Gudiyattam' },
+            ].map(({ icon, label, sub }) => (
+              <div key={label} className="flex items-start gap-3 bg-white border border-violet-100 rounded-xl px-4 py-3 flex-1">
+                <span className="text-xl leading-none mt-0.5">{icon}</span>
+                <div>
+                  <p className="text-sm font-semibold text-slate-800">{label}</p>
+                  <p className="text-xs text-slate-500">{sub}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
