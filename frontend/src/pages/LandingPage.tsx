@@ -587,8 +587,8 @@ export default function LandingPage() {
       </section>
 
       {/* ── Photo gallery ─────────────────────────────────────────────────── */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 bg-violet-50">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-10"
             initial={{ opacity: 0, y: 24 }}
@@ -596,32 +596,79 @@ export default function LandingPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              Real Kids. Real Learning 📸
+            <span className="inline-flex items-center gap-1.5 text-violet-600 text-xs font-semibold uppercase tracking-wider bg-violet-100 px-3 py-1.5 rounded-full mb-4">
+              📸 Classroom Moments
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+              Real Kids. Real Learning.
             </h2>
+            <p className="text-slate-500 text-base max-w-lg mx-auto">
+              From our recent batches in Gudiyattam — this is what AI learning looks like here.
+            </p>
           </motion.div>
 
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-5"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            {GALLERY.map(({ src, caption }) => (
-              <div key={caption} className="flex flex-col gap-2">
-                <div className="rounded-2xl overflow-hidden shadow-card border border-slate-100 bg-slate-100 aspect-video">
-                  <img
-                    src={src}
-                    alt={caption}
-                    className="w-full h-full object-cover"
-                    onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                  />
-                </div>
-                <p className="text-sm text-slate-500 text-center font-medium">{caption}</p>
+          {/* Editorial grid: wide top, two middle, wide bottom */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* Photo 1 — full width banner */}
+            <motion.div
+              className="sm:col-span-2 group relative rounded-2xl overflow-hidden shadow-card bg-slate-200 aspect-[16/7] cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              <img
+                src={GALLERY[0].src}
+                alt={GALLERY[0].caption}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-5 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <p className="text-white text-sm font-semibold">{GALLERY[0].caption}</p>
               </div>
+            </motion.div>
+
+            {/* Photos 2 & 3 — side by side */}
+            {[GALLERY[1], GALLERY[2]].map((item, i) => (
+              <motion.div
+                key={item.caption}
+                className="group relative rounded-2xl overflow-hidden shadow-card bg-slate-200 aspect-video cursor-pointer"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+              >
+                <img
+                  src={item.src}
+                  alt={item.caption}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-4 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                  <p className="text-white text-sm font-semibold">{item.caption}</p>
+                </div>
+              </motion.div>
             ))}
-          </motion.div>
+
+            {/* Photo 4 — full width banner */}
+            <motion.div
+              className="sm:col-span-2 group relative rounded-2xl overflow-hidden shadow-card bg-slate-200 aspect-[16/7] cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <img
+                src={GALLERY[3].src}
+                alt={GALLERY[3].caption}
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={e => { (e.target as HTMLImageElement).style.display = 'none'; }}
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-5 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <p className="text-white text-sm font-semibold">{GALLERY[3].caption}</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
