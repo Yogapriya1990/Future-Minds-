@@ -874,6 +874,38 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
+      <section className="py-16 bg-slate-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-flex items-center gap-1.5 text-violet-600 text-xs font-semibold uppercase tracking-wider bg-violet-100 px-3 py-1.5 rounded-full mb-4">
+              <Lightbulb size={12} /> FAQ
+            </span>
+            <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+              Common <span className="text-violet-600">questions</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            className="bg-white rounded-2xl border border-slate-100 shadow-card px-6 divide-y divide-slate-100"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            {FAQS.map((faq) => (
+              <FAQItem key={faq.q} q={faq.q} a={faq.a} />
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* ── Registration form ─────────────────────────────────────────────── */}
       <RegistrationForm />
 
@@ -1093,38 +1125,6 @@ export default function LandingPage() {
                   </div>
                 </div>
               </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ── FAQ ───────────────────────────────────────────────────────────── */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <span className="inline-flex items-center gap-1.5 text-violet-600 text-xs font-semibold uppercase tracking-wider bg-violet-100 px-3 py-1.5 rounded-full mb-4">
-              <Lightbulb size={12} /> FAQ
-            </span>
-            <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">
-              Common <span className="text-violet-600">questions</span>
-            </h2>
-          </motion.div>
-
-          <motion.div
-            className="bg-white rounded-2xl border border-slate-100 shadow-card px-6 divide-y divide-slate-100"
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            {FAQS.map((faq) => (
-              <FAQItem key={faq.q} q={faq.q} a={faq.a} />
             ))}
           </motion.div>
         </div>
