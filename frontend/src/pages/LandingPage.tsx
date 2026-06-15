@@ -158,28 +158,28 @@ const AGE_OPTIONS = [
 
 const FAQS = [
   {
-    q: 'Is it really free to start?',
-    a: 'Yes — no credit card required. You get full access to the first module of every course, the AI chat, and the sandbox for free. Upgrade to Pro anytime for unlimited access.',
+    q: 'Is this in-person or online?',
+    a: 'Classes are held in-person at Rajaganapathy Nagar, Gudiyattam. If you are unable to attend in person on a particular day, we accommodate you online via a live video session so you never miss a class.',
   },
   {
-    q: 'What AI tools are included?',
-    a: 'We cover ChatGPT, Claude, Python, LangChain, Hugging Face, n8n, Flowise, Stable Diffusion, Pinecone, and more. The curriculum is updated every quarter as new tools emerge.',
+    q: 'What age group is this suitable for?',
+    a: 'Kids from age 9 to 16 are welcome in the Kids Track. Adults of any age — whether you are a working professional, homemaker, or entrepreneur — can join the Adult Track. We also have a Family Pack so you and your child can learn together.',
   },
   {
-    q: 'Can I use it for my classroom or school?',
-    a: 'Absolutely. We offer school plans with admin dashboards, student progress tracking, content filtering, and FERPA/COPPA compliance. Contact us for institutional pricing.',
+    q: 'Does my child need a laptop or coding knowledge?',
+    a: 'No coding knowledge is needed at all — we start from absolute zero. A laptop or tablet is helpful but not mandatory for the first few sessions. We will guide you on what to arrange before the batch begins.',
   },
   {
-    q: 'How is this different from YouTube tutorials?',
-    a: 'YouTube is passive. Future Minds is hands-on — your AI tutor asks you questions, you run code in the live sandbox, and your progress is tracked so you never lose momentum.',
+    q: 'What will kids and adults actually learn?',
+    a: 'Kids learn what AI is, how tools like ChatGPT work, how to use AI for school projects, and basic automation. Adults learn practical AI tools (ChatGPT, Claude, n8n, Canva AI), workflow automation, and how to apply AI in their profession or business.',
   },
   {
-    q: 'Do I get a certificate when I finish?',
-    a: 'Yes. Every completed course generates a shareable certificate with a unique verification link. Pro users also get a portfolio page to showcase their projects.',
+    q: 'How many students are in each batch?',
+    a: 'We keep batches small — a maximum of 15 students — so every student gets personal attention and doubt clearing time. Once a batch is full, registrations move to the next batch.',
   },
   {
-    q: 'Can I cancel anytime?',
-    a: 'Yes, cancel with one click from your billing page — no forms, no calls, no questions. Your access continues until the end of your paid period.',
+    q: 'Do I get a certificate after completing the course?',
+    a: 'Yes. Every student who completes all 12 sessions receives a completion certificate from Future Minds AI Academy. This is a great addition to your child\'s portfolio or your own professional profile.',
   },
 ];
 
@@ -429,8 +429,10 @@ function RegistrationForm() {
           {submitted ? (
             <div className="text-center py-8">
               <div className="text-4xl mb-4">✅</div>
-              <p className="text-lg font-semibold text-slate-900 mb-2">Thank you!</p>
-              <p className="text-slate-500 text-sm">Early bird pricing available — ask us on WhatsApp.</p>
+              <p className="text-lg font-semibold text-slate-900 mb-2">You're registered!</p>
+              <p className="text-slate-600 text-sm leading-relaxed">
+                Yogapriya will WhatsApp you within 2 hours with batch dates, venue details, and fee confirmation.
+              </p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -540,7 +542,7 @@ export default function LandingPage() {
                   </motion.h1>
 
                   <motion.p variants={fadeUp} className="text-base text-slate-300 font-normal -mt-2">
-                    Taught by Yogapriya · ₹1,500/month · Next batch starts 1 July
+                    Taught by Yogapriya · Next batch forming now — limited seats
                   </motion.p>
 
                   <motion.p variants={fadeUp} className="text-lg sm:text-xl text-slate-300 leading-relaxed max-w-xl">
@@ -750,7 +752,7 @@ export default function LandingPage() {
                   '12 weekend live sessions',
                   'Daily 1hr doubt clearing',
                   'Certificate on completion',
-                  'Hybrid — online + in-person',
+                  'In-person, Gudiyattam',
                 ].map(f => (
                   <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
                     <span className="text-violet-500 font-bold">✓</span> {f}
@@ -790,7 +792,7 @@ export default function LandingPage() {
                   '12 weekend live sessions',
                   'Daily 1hr doubt clearing',
                   'AI tools + automation focus',
-                  'Hybrid — online + in-person',
+                  'In-person, Gudiyattam',
                 ].map(f => (
                   <li key={f} className="flex items-center gap-2 text-sm text-violet-100">
                     <span className="text-green-400 font-bold">✓</span> {f}
@@ -854,13 +856,17 @@ export default function LandingPage() {
             {[
               { icon: '📅', label: 'Saturday & Sunday', sub: 'Live classes' },
               { icon: '⏱', label: 'Mon – Fri', sub: '1hr doubt clearing session' },
-              { icon: '📍', label: 'Rajaganapathy Nagar, Gudiyattam', sub: 'Gudiyattam' },
-            ].map(({ icon, label, sub }) => (
+              { icon: '📍', label: 'Rajaganapathy Nagar, Gudiyattam', sub: 'In-person venue · Get directions ↗', href: 'https://maps.google.com/?q=Rajaganapathy+Nagar,+Gudiyattam,+Tamil+Nadu' },
+            ].map(({ icon, label, sub, href }) => (
               <div key={label} className="flex items-start gap-3 bg-white border border-violet-100 rounded-xl px-4 py-3 flex-1">
                 <span className="text-xl leading-none mt-0.5">{icon}</span>
                 <div>
                   <p className="text-sm font-semibold text-slate-800">{label}</p>
-                  <p className="text-xs text-slate-500">{sub}</p>
+                  {href ? (
+                    <a href={href} target="_blank" rel="noreferrer" className="text-xs text-violet-500 hover:underline">{sub}</a>
+                  ) : (
+                    <p className="text-xs text-slate-500">{sub}</p>
+                  )}
                 </div>
               </div>
             ))}
