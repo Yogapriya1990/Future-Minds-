@@ -848,20 +848,26 @@ export default function LandingPage() {
       </section>
 
       {/* ── Pricing cards ─────────────────────────────────────────────────── */}
-      <section className="py-16 bg-slate-50">
+      <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-10"
+            className="text-center mb-12"
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-2">Pricing</p>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900">Simple, transparent fees</h2>
+            <span className="inline-flex items-center gap-1.5 text-violet-600 text-xs font-semibold uppercase tracking-wider bg-violet-100 px-3 py-1.5 rounded-full mb-4">
+              Pricing
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Simple, transparent fees</h2>
+            <p className="text-slate-500 text-base max-w-md mx-auto">
+              One-time course fee · No subscriptions · Limited seats per batch
+            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:items-start">
 
             {/* Card 1 — Kids Track */}
             <motion.div
@@ -869,115 +875,141 @@ export default function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0 }}
-              className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col shadow-sm"
+              className="bg-white border-2 border-slate-200 rounded-2xl p-6 flex flex-col shadow-sm hover:border-violet-300 hover:shadow-md transition-all"
             >
-              <span className="inline-block self-start bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
+              <span className="inline-block self-start bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full mb-5">
                 Early Bird — First 10 seats
               </span>
-              <h3 className="text-xl font-extrabold text-slate-900 mb-0.5">Kids Track 👦</h3>
-              <p className="text-base text-slate-600 mb-4">Age 9–16</p>
-              <div className="flex items-baseline gap-2 mb-5">
-                <span className="text-3xl font-extrabold text-violet-600">₹2,999</span>
-                <span className="text-slate-400 line-through text-sm">₹3,499</span>
+              <div className="text-3xl mb-2">👦</div>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-1">Kids Track</h3>
+              <p className="text-sm text-slate-500 mb-5">Designed for ages 9–16</p>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-4xl font-extrabold text-violet-600">₹2,999</span>
               </div>
-              <ul className="space-y-2 mb-7 flex-1">
+              <p className="text-xs text-slate-400 line-through mb-6">Regular price ₹3,499</p>
+              <ul className="space-y-3 mb-8 flex-1">
                 {[
                   '12 weekend live sessions',
-                  'Daily 1hr doubt clearing',
+                  'Mon–Fri 1hr doubt clearing',
+                  'Age-appropriate curriculum',
                   'Certificate on completion',
-                  'In-person, Gudiyattam',
+                  'In-person · Gudiyattam',
                 ].map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
-                    <span className="text-violet-500 font-bold">✓</span> {f}
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-slate-600">
+                    <CheckCircle2 size={16} className="text-violet-500 flex-shrink-0 mt-0.5" />
+                    {f}
                   </li>
                 ))}
               </ul>
               <button
                 onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full py-3 px-6 rounded-xl border-2 border-violet-600 text-violet-600 font-semibold text-sm hover:bg-violet-50 transition-all"
+                className="w-full py-3 px-6 rounded-xl border-2 border-violet-600 text-violet-600 font-semibold text-sm hover:bg-violet-600 hover:text-white transition-all"
               >
                 Register Child →
               </button>
             </motion.div>
 
-            {/* Card 2 — Adult Track (Most Popular) */}
+            {/* Card 2 — Adult Track (Featured, elevated) */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl p-6 flex flex-col shadow-primary relative"
+              className="bg-gradient-to-br from-violet-600 to-purple-700 rounded-2xl p-7 flex flex-col shadow-primary relative md:-translate-y-4"
             >
-              <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-900 text-xs font-extrabold px-4 py-1 rounded-full tracking-wide">
-                MOST POPULAR
+              <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-amber-400 text-amber-900 text-xs font-extrabold px-5 py-1.5 rounded-full tracking-wide shadow-md">
+                ⭐ MOST POPULAR
               </span>
-              <span className="inline-block self-start bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 mt-2">
+              <span className="inline-block self-start bg-white/20 text-white text-xs font-bold px-3 py-1 rounded-full mb-5 mt-2">
                 Early Bird — First 10 seats
               </span>
-              <h3 className="text-xl font-extrabold text-white mb-0.5">Adult Track 👩‍💻</h3>
-              <p className="text-base text-violet-100 mb-4">Working professionals</p>
-              <div className="flex items-baseline gap-2 mb-5">
-                <span className="text-3xl font-extrabold text-amber-400">₹4,499</span>
-                <span className="text-violet-300 line-through text-sm">₹5,499</span>
+              <div className="text-3xl mb-2">👩‍💻</div>
+              <h3 className="text-xl font-extrabold text-white mb-1">Adult Track</h3>
+              <p className="text-sm text-violet-200 mb-5">Working professionals & homemakers</p>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-4xl font-extrabold text-amber-300">₹4,499</span>
               </div>
-              <ul className="space-y-2 mb-7 flex-1">
+              <p className="text-xs text-violet-300 line-through mb-6">Regular price ₹5,499</p>
+              <ul className="space-y-3 mb-8 flex-1">
                 {[
                   '12 weekend live sessions',
-                  'Daily 1hr doubt clearing',
-                  'AI tools + automation focus',
-                  'In-person, Gudiyattam',
+                  'Mon–Fri 1hr doubt clearing',
+                  'ChatGPT, Claude & n8n automation',
+                  'Apply AI to your job immediately',
+                  'Certificate on completion',
+                  'In-person · Gudiyattam',
                 ].map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-violet-100">
-                    <span className="text-green-400 font-bold">✓</span> {f}
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-violet-100">
+                    <CheckCircle2 size={16} className="text-green-400 flex-shrink-0 mt-0.5" />
+                    {f}
                   </li>
                 ))}
               </ul>
               <button
                 onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full py-3 px-6 rounded-xl bg-white text-violet-700 font-semibold text-sm hover:bg-violet-50 transition-all"
+                className="w-full py-3.5 px-6 rounded-xl bg-white text-violet-700 font-bold text-sm hover:bg-amber-50 transition-all shadow-md"
               >
                 Register Myself →
               </button>
             </motion.div>
 
-            {/* Card 3 — Family Plan */}
+            {/* Card 3 — Family Pack */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white border border-slate-200 rounded-2xl p-6 flex flex-col shadow-sm"
+              className="bg-white border-2 border-slate-200 rounded-2xl p-6 flex flex-col shadow-sm hover:border-violet-300 hover:shadow-md transition-all"
             >
-              <span className="inline-block self-start bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full mb-4">
-                Save ₹1,499
+              <span className="inline-block self-start bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full mb-5">
+                Best Value — Save ₹1,499
               </span>
-              <h3 className="text-xl font-extrabold text-slate-900 mb-0.5">Family Pack 🔥</h3>
-              <p className="text-base text-slate-600 mb-4">You + your child</p>
-              <div className="flex items-baseline gap-2 mb-5">
-                <span className="text-3xl font-extrabold text-amber-500">₹7,499</span>
-                <span className="text-slate-400 line-through text-sm">₹8,998</span>
+              <div className="text-3xl mb-2">👨‍👧</div>
+              <h3 className="text-xl font-extrabold text-slate-900 mb-1">Family Pack</h3>
+              <p className="text-sm text-slate-500 mb-5">You + your child, learning together</p>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-4xl font-extrabold text-amber-500">₹7,499</span>
               </div>
-              <ul className="space-y-2 mb-7 flex-1">
+              <p className="text-xs text-slate-400 line-through mb-6">Regular price ₹8,998</p>
+              <ul className="space-y-3 mb-8 flex-1">
                 {[
-                  'Both tracks included',
-                  'Learn AI together',
+                  'Kids Track + Adult Track included',
+                  'Both learn AI together',
                   'All sessions + doubt clearing',
-                  '2 certificates',
+                  '2 completion certificates',
+                  'Priority batch enrollment',
                 ].map(f => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-slate-600">
-                    <span className="text-violet-500 font-bold">✓</span> {f}
+                  <li key={f} className="flex items-start gap-2.5 text-sm text-slate-600">
+                    <CheckCircle2 size={16} className="text-violet-500 flex-shrink-0 mt-0.5" />
+                    {f}
                   </li>
                 ))}
               </ul>
               <button
                 onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
-                className="w-full py-3 px-6 rounded-xl border-2 border-violet-600 text-violet-600 font-semibold text-sm hover:bg-violet-50 transition-all"
+                className="w-full py-3 px-6 rounded-xl border-2 border-violet-600 text-violet-600 font-semibold text-sm hover:bg-violet-600 hover:text-white transition-all"
               >
                 Register Family →
               </button>
             </motion.div>
 
           </div>
+
+          {/* Reassurance row */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-slate-500"
+          >
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> No payment now — confirm your seat first</span>
+            <span className="hidden sm:block text-slate-300">·</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> Fee paid only after WhatsApp confirmation</span>
+            <span className="hidden sm:block text-slate-300">·</span>
+            <span className="flex items-center gap-1.5"><CheckCircle2 size={14} className="text-green-500" /> 50+ students already enrolled</span>
+          </motion.div>
+
         </div>
       </section>
 
