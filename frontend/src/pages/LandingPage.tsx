@@ -524,10 +524,10 @@ export default function LandingPage() {
                   className="space-y-6"
                 >
                   <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight">
-                    Learn AI This Weekend 🚀{' '}
+                    Learn AI This Weekend For Kids and Adults{' '}
                     <span className="relative">
                       <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
-                        For Kids &amp; Adults in Gudiyattam
+                        Beyond the Metros
                       </span>
                       <motion.span
                         className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-violet-400 to-pink-400 rounded-full"
