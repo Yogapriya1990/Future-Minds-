@@ -740,19 +740,36 @@ export default function LandingPage() {
       </section>
 
       {/* ── About instructor ──────────────────────────────────────────────── */}
-      <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-20 bg-gradient-to-br from-slate-900 via-violet-950 to-slate-900 relative overflow-hidden">
+        <FloatingOrb className="w-96 h-96 bg-violet-600/20 -top-20 right-0" />
+        <FloatingOrb className="w-64 h-64 bg-pink-500/10 bottom-0 left-10" />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <p className="text-xs font-semibold uppercase tracking-widest text-violet-500 mb-8 text-center">Who is teaching you?</p>
-            <div className="flex flex-col md:flex-row items-center gap-10">
-              {/* Circular photo */}
-              <div className="flex-shrink-0">
-                <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-violet-100 shadow-lg bg-violet-50">
+            <span className="inline-flex items-center gap-1.5 text-violet-300 text-xs font-semibold uppercase tracking-wider bg-violet-800/50 border border-violet-700/50 px-3 py-1.5 rounded-full">
+              Meet Your Instructor
+            </span>
+          </motion.div>
+
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+
+            {/* Photo with glow */}
+            <motion.div
+              className="flex-shrink-0"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="relative">
+                <div className="absolute inset-0 rounded-full bg-violet-500/40 blur-2xl scale-125 pointer-events-none" />
+                <div className="relative w-52 h-52 rounded-full overflow-hidden border-4 border-violet-400/50 shadow-2xl bg-violet-900">
                   <img
                     src="/images/priya.jpg"
                     alt="Yogapriya Sambathkumar"
@@ -761,26 +778,72 @@ export default function LandingPage() {
                   />
                 </div>
               </div>
-              {/* Text */}
-              <div className="flex-1 text-center md:text-left">
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-4">
-                  Hi, I'm Yogapriya Sambathkumar 👋
-                </h2>
-                <p className="text-slate-600 text-base leading-relaxed mb-6">
-                  I'm a Program Manager at a global tech company with 13+ years in software delivery. I work daily with AI tools, automation, and systems design — and I built Future Minds AI Academy because every child and adult in Gudiyattam deserves access to these skills, not just people in big cities.
-                  <br /><br />
-                  I teach practically, in plain language, with zero jargon.
-                </p>
-                <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                  {['PMP Certified', '13+ Years in Tech', 'AI & Automation Expert'].map(badge => (
-                    <span key={badge} className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold bg-violet-50 text-violet-700 border border-violet-200">
-                      {badge}
-                    </span>
-                  ))}
-                </div>
-              </div>
+            </motion.div>
+
+            {/* Text content */}
+            <div className="flex-1 text-center lg:text-left">
+              <motion.h2
+                className="text-3xl sm:text-4xl font-extrabold text-white mb-1"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                Hi, I'm Yogapriya 👋
+              </motion.h2>
+
+              <motion.p
+                className="text-violet-300 font-semibold text-base mb-6"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+              >
+                Program Manager · AI & Automation Practitioner · Gudiyattam
+              </motion.p>
+
+              <motion.p
+                className="text-slate-300 text-base leading-relaxed mb-6"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                13+ years in global tech delivery. I work daily with AI tools, automation, and systems design — and I built Future Minds AI Academy because every child and adult in Gudiyattam deserves access to these skills, not just people in big cities.
+              </motion.p>
+
+              <motion.blockquote
+                className="border-l-2 border-violet-400 pl-4 mb-8 text-violet-200 text-base italic"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+              >
+                "I teach practically, in plain language, with zero jargon."
+              </motion.blockquote>
+
+              {/* Credential stats */}
+              <motion.div
+                className="grid grid-cols-2 sm:grid-cols-4 gap-3"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                {[
+                  { value: '13+', label: 'Years in Tech' },
+                  { value: 'PMP', label: 'Certified' },
+                  { value: '50+', label: 'Students Trained' },
+                  { value: 'AI', label: 'Daily Practitioner' },
+                ].map(s => (
+                  <div key={s.label} className="bg-white/10 backdrop-blur border border-white/10 rounded-xl p-3 text-center">
+                    <p className="text-xl font-extrabold text-white">{s.value}</p>
+                    <p className="text-xs text-violet-300 mt-0.5">{s.label}</p>
+                  </div>
+                ))}
+              </motion.div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
