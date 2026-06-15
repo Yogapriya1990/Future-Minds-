@@ -318,7 +318,7 @@ function AnnouncementBar() {
       <p className="text-xs font-medium text-violet-100 text-center">
         <span className="font-semibold text-white">Doubt Clearing</span>
         <span className="mx-2.5 text-violet-400">|</span>
-        <span>📍 Gudiyattam, Gudiyattam</span>
+        <span>📍 Rajaganapathy Nagar, Gudiyattam</span>
       </p>
     </div>
   );
@@ -452,6 +452,8 @@ function RegistrationForm() {
                 <input
                   type="tel"
                   required
+                  pattern="[6-9][0-9]{9}"
+                  title="Enter a valid 10-digit Indian mobile number"
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
                   placeholder="10-digit WhatsApp number (e.g. 9876543210)"
@@ -460,16 +462,19 @@ function RegistrationForm() {
               </div>
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-1.5">Who is this for?</label>
-                <select
-                  required
-                  value={age}
-                  onChange={e => setAge(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition bg-white appearance-none"
-                >
-                  {AGE_OPTIONS.map(o => (
-                    <option key={o.value} value={o.value} disabled={o.value === ''}>{o.label}</option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    required
+                    value={age}
+                    onChange={e => setAge(e.target.value)}
+                    className="w-full px-4 py-3 pr-10 rounded-xl border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition bg-white appearance-none"
+                  >
+                    {AGE_OPTIONS.map(o => (
+                      <option key={o.value} value={o.value} disabled={o.value === ''}>{o.label}</option>
+                    ))}
+                  </select>
+                  <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
+                </div>
               </div>
               <button
                 type="submit"
@@ -525,7 +530,7 @@ export default function LandingPage() {
                   animate="visible"
                   className="space-y-6"
                 >
-                  <motion.h1 variants={fadeUp} className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight">
+                  <motion.h1 variants={fadeUp} className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
                     Learn AI This Weekend For Kids and Adults{' '}
                     <span className="relative">
                       <span className="bg-gradient-to-r from-violet-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent">
@@ -590,7 +595,7 @@ export default function LandingPage() {
                 <span className="text-2xl font-extrabold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent leading-tight">
                   {number}
                 </span>
-                <span className="text-xs font-semibold text-slate-500 leading-snug max-w-[100px]">{label}</span>
+                <span className="text-xs sm:text-sm font-semibold text-slate-500 leading-snug max-w-[100px]">{label}</span>
               </motion.div>
             ))}
           </div>
@@ -1063,7 +1068,7 @@ export default function LandingPage() {
             <span className="inline-flex items-center gap-1.5 text-violet-600 text-xs font-semibold uppercase tracking-wider bg-violet-100 px-3 py-1.5 rounded-full mb-4">
               <Lightbulb size={12} /> FAQ
             </span>
-            <h2 className="text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Common <span className="text-violet-600">questions</span>
             </h2>
           </motion.div>
