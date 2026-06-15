@@ -114,10 +114,10 @@ const PRICING_HIGHLIGHTS = [
 ];
 
 const LOCAL_TRUST_BADGES = [
-  { emoji: '🎓', number: '50+',      label: 'Kids Trained' },
-  { emoji: '📅', number: 'Sat & Sun', label: 'Weekend Classes' },
-  { emoji: '⏱', number: '1 Hour',   label: 'Daily Doubt Clearing' },
-  { emoji: '📍', number: 'In-Person', label: 'Gudiyattam' },
+  { emoji: '🎓', number: '50+',       label: 'Students Trained' },
+  { emoji: '📅', number: 'Sat & Sun', label: 'Live Weekend Classes' },
+  { emoji: '⏱', number: '5 Days',    label: 'Doubt Clearing / Week' },
+  { emoji: '📍', number: 'In-Person', label: 'Gudiyattam, Tamil Nadu' },
 ];
 
 const GALLERY = [
@@ -572,15 +572,26 @@ export default function LandingPage() {
       </section>
 
       {/* ── Local trust bar ───────────────────────────────────────────────── */}
-      <section className="bg-violet-50 border-y border-violet-100 py-6">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {LOCAL_TRUST_BADGES.map(({ emoji, number, label }) => (
-              <div key={label} className="flex flex-col items-center text-center gap-1">
-                <span className="text-2xl">{emoji}</span>
-                <span className="text-lg font-extrabold text-violet-700 leading-tight">{number}</span>
-                <span className="text-xs font-medium text-violet-500">{label}</span>
-              </div>
+      <section className="bg-slate-50 border-y border-slate-100">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-px bg-slate-200">
+            {LOCAL_TRUST_BADGES.map(({ emoji, number, label }, i) => (
+              <motion.div
+                key={label}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="bg-white flex flex-col items-center text-center gap-2 py-8 px-4"
+              >
+                <div className="w-11 h-11 rounded-full bg-violet-50 border border-violet-100 flex items-center justify-center text-2xl mb-1">
+                  {emoji}
+                </div>
+                <span className="text-2xl font-extrabold bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent leading-tight">
+                  {number}
+                </span>
+                <span className="text-xs font-semibold text-slate-500 leading-snug max-w-[100px]">{label}</span>
+              </motion.div>
             ))}
           </div>
         </div>
