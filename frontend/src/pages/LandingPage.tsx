@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import {
   Zap, Bot, Star, CheckCircle2, Lightbulb, ChevronDown,
 } from 'lucide-react';
@@ -75,6 +75,70 @@ const FAQS = [
   },
 ];
 
+// ─── Curriculum data ──────────────────────────────────────────────────────────
+
+type WeekItem  = { n: number; topic: string; build: string; takeHome: string };
+type MonthItem = { month: string; label: string; weeks: WeekItem[] };
+
+const KIDS_CURRICULUM: MonthItem[] = [
+  {
+    month: 'Month 1', label: 'Understand AI',
+    weeks: [
+      { n: 1,  topic: 'What is AI? How machines think vs humans',          build: 'AI Myths vs Facts activity sheet',    takeHome: 'Poster to take home' },
+      { n: 2,  topic: 'AI that sees – image recognition',                  build: 'Teachable Machine photo classifier',  takeHome: '"My AI Camera" demo' },
+      { n: 3,  topic: 'AI that talks – chatbots & voice',                  build: 'Simple chatbot with ChatGPT',         takeHome: 'Chat with your own AI' },
+      { n: 4,  topic: 'AI that creates – art & stories',                   build: 'AI storybook with images',            takeHome: 'Printed mini storybook' },
+    ],
+  },
+  {
+    month: 'Month 2', label: 'Use AI Like a Pro',
+    weeks: [
+      { n: 5,  topic: 'AI tools for school – notes, summaries, flashcards', build: 'AI study kit for their subject',     takeHome: 'Personal study assistant' },
+      { n: 6,  topic: 'AI for creativity – music, art, video',              build: 'Short AI-generated video',           takeHome: '30-sec AI film' },
+      { n: 7,  topic: 'Prompt engineering for kids – how to talk to AI',    build: 'Prompt recipe book',                 takeHome: 'Personal prompt library' },
+      { n: 8,  topic: 'Intro to coding with AI help – Python basics',       build: '"Hello World" + simple calculator',  takeHome: 'First Python program' },
+    ],
+  },
+  {
+    month: 'Month 3', label: 'Build & Showcase',
+    weeks: [
+      { n: 9,  topic: 'Mini project kickoff – pick your idea',              build: 'Project plan + first version',       takeHome: 'Project blueprint' },
+      { n: 10, topic: 'Build your project – Part 2',                        build: 'Working prototype',                  takeHome: 'App / tool / story' },
+      { n: 11, topic: 'AI ethics – good AI, bad AI, fake news',             build: 'Ethics debate + quiz',               takeHome: 'Ethics pledge card' },
+      { n: 12, topic: 'Demo Day – present to parents',                      build: 'Final project showcase',             takeHome: 'Certificate + badge' },
+    ],
+  },
+];
+
+const ADULT_CURRICULUM: MonthItem[] = [
+  {
+    month: 'Month 1', label: 'AI Foundations',
+    weeks: [
+      { n: 1,  topic: 'AI landscape – what\'s real, what\'s hype in 2025',       build: 'Personal AI opportunity map',        takeHome: '"Where AI fits my life" doc' },
+      { n: 2,  topic: 'Prompt engineering – talk to AI like a pro',              build: 'Prompt library for your job',         takeHome: '20-prompt personal kit' },
+      { n: 3,  topic: 'ChatGPT, Gemini, Claude – which tool for what',           build: 'Tool comparison cheatsheet',          takeHome: 'Ready-to-use toolkit' },
+      { n: 4,  topic: 'AI for writing – emails, reports, content',               build: '5 reusable templates',               takeHome: 'Professional template pack' },
+    ],
+  },
+  {
+    month: 'Month 2', label: 'AI for Your Work',
+    weeks: [
+      { n: 5,  topic: 'AI for teachers – lesson plans, assessments, feedback',   build: 'Full AI-generated lesson plan',       takeHome: 'Reusable teaching kit' },
+      { n: 6,  topic: 'AI for business owners – marketing, WhatsApp, content',   build: '30-day social content plan',          takeHome: 'Ready-to-post content' },
+      { n: 7,  topic: 'AI for data – Excel + AI analysis',                       build: 'Automated monthly report',            takeHome: 'Working Excel + AI workflow' },
+      { n: 8,  topic: 'Build your own AI assistant – no coding needed',           build: 'Custom GPT for your use case',        takeHome: 'Personal AI assistant' },
+    ],
+  },
+  {
+    month: 'Month 3', label: 'Build & Lead',
+    weeks: [
+      { n: 9,  topic: 'Automate one task in your life/work',                     build: 'One real automation live',            takeHome: 'Saved 2+ hours/week' },
+      { n: 10, topic: 'AI for your industry deep dive',                           build: 'Industry-specific AI playbook',       takeHome: 'Shareable resource doc' },
+      { n: 11, topic: 'How to stay current – AI changes fast',                   build: 'Personal 6-month learning plan',      takeHome: 'Learning system' },
+      { n: 12, topic: 'Showcase + Certification',                                build: 'Present your AI project',             takeHome: 'Certificate + LinkedIn badge' },
+    ],
+  },
+];
 
 // ─── Animation variants ────────────────────────────────────────────────────────
 
@@ -270,6 +334,190 @@ function FAQItem({ q, a }: { q: string; a: string }) {
         <p className="text-sm text-slate-500 leading-relaxed pb-5">{a}</p>
       )}
     </div>
+  );
+}
+
+function CurriculumSection() {
+  const [activeTab, setActiveTab] = useState<'kids' | 'adult'>('kids');
+  const [openMonth, setOpenMonth] = useState<number | null>(0);
+
+  const curriculum = activeTab === 'kids' ? KIDS_CURRICULUM : ADULT_CURRICULUM;
+
+  return (
+    <section className="py-20 bg-slate-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <motion.div
+          className="text-center mb-10"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="inline-flex items-center gap-1.5 text-violet-600 text-xs font-semibold uppercase tracking-wider bg-violet-100 px-3 py-1.5 rounded-full mb-4">
+            <Lightbulb size={12} /> Curriculum
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-3">
+            What Will You Learn in 12 Weekends?
+          </h2>
+          <p className="text-slate-500 text-base max-w-lg mx-auto">
+            Hands-on weekend classes. Real projects. No prior experience needed.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mt-4">
+            {[
+              { dot: 'bg-violet-500', label: 'Saturday — New lesson' },
+              { dot: 'bg-purple-400', label: 'Sunday — Hands-on build' },
+              { dot: 'bg-slate-400',  label: 'Mon–Fri — 1-hr doubt clearing' },
+            ].map(({ dot, label }) => (
+              <span key={label} className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-600 bg-white border border-slate-200 px-3 py-1 rounded-full">
+                <span className={`w-2 h-2 rounded-full flex-shrink-0 ${dot}`} />
+                {label}
+              </span>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Tab Toggle */}
+        <motion.div
+          className="flex justify-center mb-8"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+        >
+          <div className="flex gap-1.5 bg-slate-200/70 p-1 rounded-xl">
+            {(['kids', 'adult'] as const).map(tab => (
+              <button
+                key={tab}
+                onClick={() => { setActiveTab(tab); setOpenMonth(0); }}
+                className={`px-5 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                  activeTab === tab
+                    ? 'bg-gradient-to-r from-violet-600 to-purple-600 text-white shadow-primary'
+                    : 'text-slate-600 hover:text-slate-800 bg-transparent'
+                }`}
+              >
+                {tab === 'kids' ? 'Kids Track (Age 9–16)' : 'Adult Track (Working Professionals)'}
+              </button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Accordion */}
+        <motion.div
+          className="space-y-3"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          {curriculum.map((month, i) => (
+            <div key={`${activeTab}-${month.month}`} className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+
+              {/* Accordion header */}
+              <button
+                onClick={() => setOpenMonth(openMonth === i ? null : i)}
+                className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-slate-50/70 transition-colors"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center text-white text-sm font-extrabold flex-shrink-0 shadow-primary">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-violet-600 uppercase tracking-wider">{month.month}</p>
+                    <p className="text-base font-bold text-slate-900">{month.label}</p>
+                  </div>
+                </div>
+                <ChevronDown
+                  size={18}
+                  className={`text-slate-400 flex-shrink-0 transition-transform duration-200 ${openMonth === i ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {/* Accordion body */}
+              <AnimatePresence initial={false}>
+                {openMonth === i && (
+                  <motion.div
+                    key="body"
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 border-t border-slate-100">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4">
+                        {month.weeks.map(w => (
+                          <div
+                            key={w.n}
+                            className="rounded-xl border border-slate-100 bg-slate-50/60 p-4 hover:border-violet-200 hover:bg-violet-50/30 transition-all"
+                          >
+                            <div className="mb-3">
+                              <span className="bg-violet-100 text-violet-700 text-xs font-extrabold px-2.5 py-0.5 rounded-full">
+                                Weekend {w.n}
+                              </span>
+                            </div>
+                            <div className="space-y-2">
+                              <div className="flex items-start gap-2">
+                                <span className="inline-flex items-center gap-1 bg-violet-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">SAT</span>
+                                <p className="text-sm font-semibold text-slate-900 leading-snug">{w.topic}</p>
+                              </div>
+                              <div className="flex items-start gap-2">
+                                <span className="inline-flex items-center gap-1 bg-purple-400 text-white text-[10px] font-bold px-1.5 py-0.5 rounded flex-shrink-0 mt-0.5">SUN</span>
+                                <p className="text-xs text-slate-600">
+                                  <span className="font-semibold text-slate-700">Build: </span>{w.build}
+                                </p>
+                              </div>
+                              <div className="flex items-start gap-2 pl-7">
+                                <span className="text-sm flex-shrink-0 -ml-5 mt-0.5">🎁</span>
+                                <p className="text-xs text-slate-500">
+                                  <span className="font-semibold text-slate-600">Take home: </span>{w.takeHome}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* Sunday note */}
+        <motion.div
+          className="mt-6 flex items-start gap-3 bg-violet-50 border border-violet-100 rounded-xl px-5 py-4"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <span className="text-xl flex-shrink-0">💬</span>
+          <p className="text-sm text-violet-700 font-semibold leading-relaxed">
+            Mon–Fri: 1-hour daily doubt-clearing session included every weekday — ask anything from the weekend's lessons before the next class.
+          </p>
+        </motion.div>
+
+        {/* CTA */}
+        <motion.div
+          className="mt-8 text-center"
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.25 }}
+        >
+          <button
+            onClick={() => document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })}
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-500 hover:to-purple-500 text-white font-semibold px-8 py-4 rounded-xl shadow-primary-lg hover:shadow-primary-xl transition-all hover:-translate-y-0.5 text-base"
+          >
+            Secure Your Spot — Only 12 Seats Per Batch →
+          </button>
+        </motion.div>
+
+      </div>
+    </section>
   );
 }
 
@@ -707,6 +955,9 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Curriculum ───────────────────────────────────────────────────── */}
+      <CurriculumSection />
 
       {/* ── Pricing cards ─────────────────────────────────────────────────── */}
       <section className="py-16 bg-white">
