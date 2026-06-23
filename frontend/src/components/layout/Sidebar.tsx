@@ -43,16 +43,12 @@ export function SidebarContent() {
     <div className="flex flex-col h-full">
       {/* Logo */}
       <div className="px-5 py-5 border-b border-white/8">
-        <Link to="/dashboard" className="flex items-center gap-2.5 group">
+        <Link to="/dashboard" className="flex items-center group">
           <img
-            src="/logo.png"
+            src="/future%20minds%20Logo.png"
             alt="Future Minds"
-            className="w-8 h-8 group-hover:scale-105 transition-transform object-contain"
+            className="w-10 h-10 group-hover:scale-105 transition-transform object-contain rounded-xl"
           />
-          <div>
-            <span className="text-sm font-bold text-white tracking-tight leading-none block">Future Minds</span>
-            <span className="text-2xs text-slate-500 font-medium">AI Platform</span>
-          </div>
         </Link>
       </div>
 

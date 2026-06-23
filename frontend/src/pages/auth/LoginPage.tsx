@@ -40,9 +40,8 @@ export default function LoginPage() {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="relative z-10">
-          <div className="flex items-center gap-2.5">
-            <img src="/logo.png" alt="Future Minds" className="h-9 object-contain" />
-            <span className="text-lg font-bold text-white tracking-tight">Future Minds AI</span>
+          <div className="flex items-center">
+            <img src="/future%20minds%20Logo.png" alt="Future Minds" className="h-12 object-contain rounded-xl" />
           </div>
         </div>
 
@@ -83,9 +82,8 @@ export default function LoginPage() {
           className="w-full max-w-md"
         >
           {/* Mobile logo */}
-          <div className="flex items-center gap-2 mb-8 lg:hidden">
-            <img src="/logo.png" alt="Future Minds" className="h-8 object-contain" />
-            <span className="text-base font-bold text-slate-900">Future Minds AI</span>
+          <div className="flex items-center mb-8 lg:hidden">
+            <img src="/future%20minds%20Logo.png" alt="Future Minds" className="h-10 object-contain rounded-xl" />
           </div>
 
           <div className="mb-8">

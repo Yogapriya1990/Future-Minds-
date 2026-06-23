@@ -287,9 +287,13 @@ function NavBar() {
       transition={{ duration: 0.5 }}
       className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200/60"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div className="flex items-center">
-          <img src="/logo-wordmark.svg" alt="Future Minds AI" className="h-8 object-contain" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <img src="/future%20minds%20Logo.png" alt="Future Minds AI" className="h-20 object-contain rounded-xl" />
+          <div className="flex flex-col leading-tight">
+            <span className="text-2xl font-extrabold text-slate-900 tracking-tight">Future Minds</span>
+            <span className="text-sm font-semibold text-violet-600 tracking-widest uppercase">AI Academy</span>
+          </div>
         </div>
 
         <div className="flex items-center gap-2">
@@ -1192,8 +1196,12 @@ export default function LandingPage() {
     <footer className="bg-slate-900 border-t border-slate-800">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <img src="/logo-wordmark.svg" alt="Future Minds AI Academy" className="h-6 object-contain" />
+          <div className="flex items-center gap-2.5">
+            <img src="/future%20minds%20Logo.png" alt="Future Minds AI Academy" className="h-14 object-contain rounded-xl" />
+            <div className="flex flex-col leading-tight">
+              <span className="text-lg font-extrabold text-white tracking-tight whitespace-nowrap">Future Minds</span>
+              <span className="text-xs font-semibold text-violet-400 tracking-widest uppercase whitespace-nowrap">AI Academy</span>
+            </div>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 text-xs text-slate-500">
             <span>📍 Rajaganapathy Nagar, Gudiyattam, Tamil Nadu</span>
